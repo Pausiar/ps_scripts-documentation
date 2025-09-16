@@ -1,0 +1,41 @@
+# Configuración básica del sitio
+title: "Script Documentation"
+description: "Documentación completa de scripts útiles"
+baseurl: "" # el subpath de tu sitio, ej. /blog
+url: "https://tu-usuario.github.io" # la URL base del sitio
+
+# Información del autor
+author:
+  name: "Tu Nombre"
+  email: "tu-email@example.com"
+  github: "tu-usuario"
+
+# Configuración de GitHub Pages
+repository: tu-usuario/nombre-repositorio
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Excluir archivos del build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
+
+# Configuración adicional
+timezone: Europe/Madrid
+encoding: utf-8
+
+# SEO
+lang: es
+locale: es_ES
