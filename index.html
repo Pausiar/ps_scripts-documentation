@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación de Scripts</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <title>Pausiar Scripts - Documentación</title>
     <style>
         * {
             margin: 0;
@@ -35,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -63,7 +61,6 @@
             50% { transform: translateY(-20px) rotate(180deg); }
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -126,7 +123,6 @@
             width: 100%;
         }
 
-        /* Main content */
         .main {
             margin-top: 80px;
             padding: 2rem;
@@ -137,7 +133,6 @@
             margin: 0 auto;
         }
 
-        /* Hero section */
         .hero {
             text-align: center;
             padding: 4rem 0;
@@ -191,7 +186,34 @@
             }
         }
 
-        /* Cards grid */
+        .search-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
         .scripts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -240,6 +262,7 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .tag {
@@ -253,6 +276,7 @@
         .script-actions {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -264,6 +288,7 @@
             border: none;
             cursor: pointer;
             font-size: 0.875rem;
+            text-align: center;
         }
 
         .btn-primary {
@@ -286,62 +311,6 @@
             color: var(--text-primary);
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--dark-secondary);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 800px;
-            width: 90%;
-            max-height: 80%;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .close {
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: var(--text-primary);
-        }
-
-        .code-block {
-            background: var(--dark);
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            border: 1px solid var(--border);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -354,35 +323,10 @@
             .scripts-grid {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* Search */
-        .search-container {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 500px;
-            padding: 1rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            backdrop-filter: blur(20px);
-        }
-
-        .search-box::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            
+            .script-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -413,7 +357,7 @@
             </div>
 
             <section class="scripts-grid" id="scripts">
-                <!-- Script 1: Advanced AntiCheat -->
+                <!-- Advanced AntiCheat -->
                 <div class="script-card" data-tags="fivem anticheat security lua">
                     <h3>🛡️ Advanced AntiCheat System</h3>
                     <p>Sistema anti-cheat avanzado con detección de menús en pantalla, verificación de eventos seguros y detección de props anómalas. Incluye base de datos completa y sistema de bans.</p>
@@ -424,12 +368,11 @@
                         <span class="tag">Anti-Cheat</span>
                     </div>
                     <div class="script-actions">
-                        <button class="btn btn-primary" onclick="showModal('anticheat-script')">Ver Tutorial</button>
-                        <a href="https://github.com/Pausiar" class="btn btn-secondary">Ver en GitHub</a>
+                        <a href="anticheat.html" class="btn btn-primary">Ver Documentación</a>
                     </div>
                 </div>
 
-                <!-- Script 2: PS Ask Money -->
+                <!-- PS Ask Money -->
                 <div class="script-card" data-tags="fivem qbcore roleplay mendigar">
                     <h3>💰 PS Ask Money</h3>
                     <p>Sistema de mendicidad con animaciones realistas y interacción con NPCs. Permite tocar música y mostrar carteles con recompensas configurables.</p>
@@ -440,12 +383,11 @@
                         <span class="tag">Animaciones</span>
                     </div>
                     <div class="script-actions">
-                        <button class="btn btn-primary" onclick="showModal('askmoney-script')">Ver Tutorial</button>
-                        <a href="https://github.com/Pausiar" class="btn btn-secondary">Ver en GitHub</a>
+                        <a href="askmoney.html" class="btn btn-primary">Ver Documentación</a>
                     </div>
                 </div>
 
-                <!-- Script 3: PS Bartender -->
+                <!-- PS Bartender -->
                 <div class="script-card" data-tags="fivem esx job bartender mysql">
                     <h3>🍺 PS Bartender</h3>
                     <p>Sistema completo de bartender con jobs, rangos, experiencia y configuración in-character. Incluye base de datos MySQL y sistema económico avanzado.</p>
@@ -456,12 +398,11 @@
                         <span class="tag">Economia</span>
                     </div>
                     <div class="script-actions">
-                        <button class="btn btn-primary" onclick="showModal('bartender-script')">Ver Tutorial</button>
-                        <a href="https://github.com/Pausiar" class="btn btn-secondary">Ver en GitHub</a>
+                        <a href="bartender.html" class="btn btn-primary">Ver Documentación</a>
                     </div>
                 </div>
 
-                <!-- Script 4: Money Truck Heist -->
+                <!-- Money Truck Heist -->
                 <div class="script-card" data-tags="fivem esx heist robbery police">
                     <h3>🚛 Money Truck Heist</h3>
                     <p>Sistema completo de atracos a camiones de dinero con NPCs inteligentes, spawns dinámicos e integración con sistemas policiales. Experiencia cinematográfica completa.</p>
@@ -472,498 +413,45 @@
                         <span class="tag">NPCs</span>
                     </div>
                     <div class="script-actions">
-                        <button class="btn btn-primary" onclick="showModal('moneytruck-script')">Ver Tutorial</button>
-                        <a href="https://github.com/Pausiar" class="btn btn-secondary">Ver en GitHub</a>
+                        <a href="moneytruck.html" class="btn btn-primary">Ver Documentación</a>
+                    </div>
+                </div>
+
+                <!-- Anti-Tank System -->
+                <div class="script-card" data-tags="fivem anticheat tank security">
+                    <h3>🛡️ Anti-Tank System</h3>
+                    <p>Sistema anti-tank avanzado que detecta y previene el uso de tanques y vehículos militares no autorizados en el servidor. Incluye alertas automáticas y sistema de sanciones.</p>
+                    <div class="script-meta">
+                        <span class="tag">FiveM</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Anti-Tank</span>
+                        <span class="tag">Protection</span>
+                    </div>
+                    <div class="script-actions">
+                        <a href="antitank.html" class="btn btn-primary">Ver Documentación</a>
+                        <a href="https://github.com/Pausiar/anti-tank" class="btn btn-secondary">Ver en GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Admin Menu -->
+                <div class="script-card" data-tags="fivem admin menu management">
+                    <h3>⚙️ Advanced Admin Menu</h3>
+                    <p>Panel de administración completo con múltiples herramientas para gestión de jugadores, vehículos, objetos y servidor. Interfaz moderna y fácil de usar.</p>
+                    <div class="script-meta">
+                        <span class="tag">FiveM</span>
+                        <span class="tag">Admin</span>
+                        <span class="tag">Management</span>
+                        <span class="tag">Tools</span>
+                    </div>
+                    <div class="script-actions">
+                        <a href="adminmenu.html" class="btn btn-primary">Ver Documentación</a>
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Modal para mostrar código -->
-    <div class="modal" id="codeModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">Código del Script</h2>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-            <div id="modalBody">
-                <!-- El contenido se cargará dinámicamente -->
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    
     <script>
-        // Datos de los scripts
-        const scriptsData = {
-            'anticheat-script': {
-                title: '🛡️ Advanced AntiCheat System',
-                description: 'Sistema anti-cheat avanzado para FiveM con detección completa y base de datos',
-                installation: `# 1. Preparar Base de Datos (IMPORTANTE)
-# Ejecutar anticheat_install.sql en MySQL:
-mysql -u usuario -p base_datos < anticheat_install.sql
-
-# 2. Instalar dependencia MySQL
-ensure mysql-async  # O oxmysql/ghmattimysql
-
-# 3. Configurar en server.cfg
-ensure screenshot-basic
-ensure advanced-anticheat
-
-# 4. Permisos
-add_ace group.admin anticheat.admin allow
-add_ace group.admin anticheat.notify allow`,
-                code: `-- config.lua - Configuración Principal
-Config = {}
-
--- Configuración General con Base de Datos
-Config.General = {
-    UseDatabase = true,              -- HABILITAR BASE DE DATOS
-    DatabaseType = "mysql",          -- mysql o sqlite
-    ServerName = "Mi Servidor RP",
-    MaxViolations = 5,               -- Violaciones antes de ban
-    StatsSaveInterval = 300000       -- Guardar stats cada 5 min
-}
-
--- Sistema de Screenshots
-Config.Screenshot = {
-    Enabled = true,
-    Interval = 30000,                -- 30 segundos entre capturas
-    Quality = 0.8,
-    AIAnalysis = true,               -- Análisis automático de menús
-    WebhookURL = "tu_webhook_discord", -- Opcional
-    AutoScreenshotOnViolation = true
-}
-
--- Detección de Eventos Seguros
-Config.SafeEvents = {
-    Enabled = true,
-    BlacklistedEvents = {
-        "esx:addMoney",
-        "banking:addMoney",
-        "spawn_money",
-        "qb-admin:server:giveMoney"
-    },
-    SuspiciousAmounts = {
-        Money = 1000000,             -- Cantidades sospechosas
-        Items = 100
-    }
-}
-
--- Detección de Props Anómalas
-Config.PropsDetection = {
-    Enabled = true,
-    MaxPropsPerPlayer = 50,
-    BlacklistedProps = {
-        "prop_money_bag_01",
-        "prop_cash_pile_01",
-        "prop_gold_bar"
-    }
-}
-
--- Sistema de Sanciones Progresivas
-Config.Sanctions = {
-    Progressive = {
-        Enabled = true,
-        Rules = {
-            Critical = {             -- ONSCREEN_MENU, AIMBOT
-                Actions = {"SCREENSHOT", "TEMP_BAN", "BAN"}
-            },
-            Severe = {               -- BLACKLISTED_PROP
-                Actions = {"WARNING", "KICK", "TEMP_BAN", "BAN"}
-            },
-            Minor = {                -- SPEED_ANOMALY
-                Actions = {"WARNING", "WARNING", "KICK", "TEMP_BAN"}
-            }
-        }
-    }
-}`,
-                usage: `# Comandos de Administrador
-/ac                              # Panel de administración web
-/anticheat:status               # Estadísticas del sistema
-/anticheat:whitelist <id> [razón] # Añadir a whitelist permanente
-/anticheat:unban <steam_id>      # Desbanear jugador
-
-# Comandos de Moderador  
-/anticheat:playerinfo <id>       # Ver historial del jugador
-
-# Acceso al Panel Web
-# Usar /ac en el juego (requiere permiso anticheat.admin)`
-            },
-            'askmoney-script': {
-                title: '💰 PS Ask Money - Sistema de Mendicidad',
-                description: 'Sistema avanzado de mendicidad para QBCore con animaciones y NPCs',
-                installation: `# 1. Verificar Dependencias
-ensure qb-core
-ensure ox_lib  
-ensure ox_target
-
-# 2. Instalar el Script
-# Colocar archivos en resources/ps_askmoney/
-
-# 3. Configurar server.cfg
-ensure ps_askmoney
-
-# 4. Reiniciar servidor`,
-                code: `-- config.lua - Configuración Principal
-Config = {}
-
--- Configuración General
-Config.BeggingRadius = 25.0      -- Radio de detección de NPCs
-Config.MaxNPCs = 5               -- Máximo NPCs que pueden acercarse  
-Config.MoneyDropChance = 80      -- Probabilidad de recibir dinero (%)
-Config.CleanupTime = 60000       -- Tiempo para limpiar props (60s)
-
--- Sistema de Recompensas
-Config.Rewards = {
-    item = 'money',              -- Tipo de item
-    amount = {min = 1, max = 15}, -- Cantidad mínima y máxima
-    itemLabel = 'Dinero'
-}
-
--- Configuración de Props de Dinero
-Config.MoneyProps = {
-    'prop_cash_pile_01',
-    'prop_money_bag_01',
-    'prop_cash_dep_bag_01'
-}
-
--- Animaciones Disponibles
-Config.Animations = {
-    music = {
-        type = 'music',
-        label = '🎸 Tocar Música',
-        dict = 'amb@world_human_musician@guitar@male@base',
-        anim = 'base',
-        prop = 'prop_acc_guitar_01',
-        propBone = 24818,
-        propPos = {x = -0.1, y = 0.31, z = 0.1},
-        propRot = {x = 0.0, y = 90.0, z = 0.0}
-    },
-    sign = {
-        type = 'sign', 
-        label = '📋 Mostrar Cartel',
-        dict = 'amb@world_human_bum_freeway@male@base',
-        anim = 'base',
-        prop = 'prop_beggers_sign_03',
-        propBone = 28422,
-        propPos = {x = 0.0, y = 0.0, z = 0.0},
-        propRot = {x = 0.0, y = 0.0, z = 0.0}
-    }
-}
-
--- Sistema Anti-Spam
-Config.AntiSpam = {
-    enabled = true,
-    cooldown = 300000            -- 5 minutos entre usos
-}`,
-                usage: `# Comandos Disponibles
-/mendigar          # Abrir menú de mendicidad
-/pararmendigar     # Detener mendicidad actual
-
-# Comandos de Admin  
-/stopbegging [id]  # Detener mendicidad de un jugador
-
-# Flujo de Uso
-1. Usar /mendigar para abrir el menú
-2. Seleccionar tipo de mendicidad (música o cartel)
-3. Los NPCs cercanos se acercarán automáticamente
-4. Recoger dinero que dejen con E (ox_target)
-5. Usar /pararmendigar para finalizar`
-            },
-            'bartender-script': {
-                title: '🍺 PS Bartender Sistema Completo',
-                description: 'Sistema avanzado de bartender para ESX con jobs, rangos y base de datos',
-                installation: `# 1. Configurar Base de Datos
-# Ejecutar ps_bartender.sql:
-mysql -u usuario -p base_datos < ps_bartender.sql
-
-# 2. Verificar Dependencias
-ensure es_extended
-ensure ox_target
-ensure ox_lib
-ensure oxmysql
-
-# 3. Configurar el Script
-# Editar config.lua según tus necesidades
-
-# 4. Añadir a server.cfg
-ensure ps_bartender
-
-# 5. Configurar Permisos (opcional)
-add_ace group.admin bartender.admin allow`,
-                code: `-- config.lua - Configuración Principal
-Config = {}
-
--- Configuración de Jobs
-Config.JobSettings = {
-    createNewJob = true,             -- true = crear job, false = usar existente
-    existingJobName = 'bartender',   -- Job existente
-    newJobData = {
-        name = 'bartender',
-        label = 'Bartender'
-    }
-}
-
--- Rangos y Salarios del Job
-Config.JobGrades = {
-    [0] = { name = 'trainee', label = 'Aprendiz', salary = 200 },
-    [1] = { name = 'bartender', label = 'Bartender', salary = 350 },
-    [2] = { name = 'mixologist', label = 'Mixólogo', salary = 500 },
-    [3] = { name = 'headbartender', label = 'Jefe de Barra', salary = 700 },
-    [4] = { name = 'manager', label = 'Manager', salary = 1000 }
-}
-
--- Sistema de Experiencia
-Config.Experience = {
-    xpPerDrink = 5,              -- XP por bebida servida
-    xpPerShift = 50,             -- XP por turno completado
-    xpRequirements = {
-        [1] = 500,               -- Para Bartender
-        [2] = 1200,              -- Para Mixólogo  
-        [3] = 2500,              -- Para Jefe de Barra
-        [4] = 5000               -- Para Manager
-    }
-}
-
--- Items por Rango
-Config.BartenderItems = {
-    {name = 'beer', label = 'Cerveza', price = 5, minGrade = 0},
-    {name = 'whisky', label = 'Whisky', price = 15, minGrade = 1},
-    {name = 'cocktail', label = 'Cocktail', price = 20, minGrade = 2},
-    {name = 'cocktail_premium', label = 'Cocktail Premium', price = 35, minGrade = 3}
-}
-
--- Sistema de Propinas
-Config.Tips = {
-    enabled = true,
-    minTip = 1,
-    maxTip = 100,
-    suggested = {5, 10, 15, 20}
-}
-
--- Animaciones de Preparación
-Config.BartenderAnimations = {
-    {dict = 'amb@world_human_bartender@male@base', anim = 'base', duration = 4000, label = 'Preparando bebida'},
-    {dict = 'mini@drinking', anim = 'shots_barman_b', duration = 3000, label = 'Sirviendo shot'}
-}`,
-                usage: `# Comandos Principales
-/bartender         # Menú principal del bartender
-
-# Comandos de Admin
-/bartender_admin setgrade [playerID] [grado]  # Cambiar grado
-/bartender_admin reloadbars                   # Recargar bares
-
-# Flujo de Trabajo
-1. Tener job de bartender asignado
-2. Usar /bartender para entrar en servicio  
-3. Configurar puntos de bar (grado 2+)
-4. Posicionarse en punto de bartender
-5. Atender clientes que usen ox_target
-6. Ganar XP y subir de rango automáticamente
-
-# Sistema de Progresión
-- Aprendiz: 0 XP, $200 salario
-- Bartender: 500 XP, $350 salario  
-- Mixólogo: 1,200 XP, $500 salario + gestión
-- Jefe de Barra: 2,500 XP, $700 salario
-- Manager: 5,000 XP, $1,000 salario`
-            },
-            'moneytruck-script': {
-                title: '🚛 Money Truck Heist System',
-                description: 'Sistema completo de atracos a camiones blindados con NPCs inteligentes',
-                installation: `# 1. Verificar Dependencias
-ensure es_extended
-ensure ox_target  
-ensure origen-police
-
-# 2. Instalar el Script
-# Colocar archivos en resources/money-truck/
-
-# 3. Configurar server.cfg
-ensure money-truck
-
-# 4. Configurar Permisos (para spawn manual)
-add_ace group.admin moneytruck.spawn allow
-
-# 5. Reiniciar servidor`,
-                code: `-- config.lua - Configuración Principal
-Config = {}
-
--- Configuración de Spawns
-Config.SpawnInterval = 30 * 60 * 1000    -- 30 minutos entre spawns
-Config.MaxActiveTrucks = 1               -- Máximo camiones activos
-
--- Configuración del Vehículo
-Config.TruckModel = "stockade"           -- Modelo del camión
-Config.PedModel = "s_m_m_security_01"    -- Modelo de guardias
-Config.NPCWeapon = "WEAPON_CARBINERIFLE" -- Arma de los NPCs
-Config.NPCAccuracy = 40                  -- Precisión (0-100)
-
--- Sistema de Recompensas
-Config.RewardType = "black_money"        -- Tipo de recompensa
-Config.RewardAmount = 125000             -- Cantidad base
-Config.RandomReward = true               -- Recompensa aleatoria
-Config.RewardRange = {75000, 200000}     -- Rango aleatorio
-
--- Puntos de Spawn de Camiones
-Config.SpawnPoints = {
-    {x = -1030.0, y = -2730.0, z = 13.8, h = 240.0},
-    {x = 1200.0, y = -3100.0, z = 5.9, h = 90.0},
-    {x = -500.0, y = -1800.0, z = 20.0, h = 180.0},
-    {x = 800.0, y = 1200.0, z = 340.0, h = 0.0}
-}
-
--- Destinos (Bancos)
-Config.BankDestinations = {
-    {x = -1212.0, y = -330.8, z = 37.8},   -- Banco Central
-    {x = -2962.6, y = 482.2, z = 15.7},    -- Banco Oeste
-    {x = -112.2, y = 6469.3, z = 31.6},    -- Banco Norte
-    {x = 1175.0, y = 2706.6, z = 38.1}     -- Banco Desierto
-}
-
--- Configuración de Alertas Policiales
-Config.PoliceAlert = {
-    enabled = true,
-    dispatchCode = "10-90",              -- Código de radio
-    message = "Atraco a camión blindado en progreso",
-    blipTime = 60000,                    -- Tiempo del blip (1 minuto)
-    requiredCops = 2                     -- Policías mínimos online
-}
-
--- Sistema de Blips
-Config.Blips = {
-    truck = {
-        sprite = 67,
-        color = 1,
-        scale = 0.8,
-        label = "Camión Blindado"
-    },
-    robbery = {
-        sprite = 161,
-        color = 1, 
-        scale = 1.0,
-        label = "Atraco en Curso"
-    }
-}`,
-                usage: `# Funcionamiento Automático
-- Camiones spawnan automáticamente cada 30 min
-- Siguen rutas hacia bancos aleatorios
-- Al disparar, activan protocolo de emergencia
-
-# Comandos de Admin
-/spawntruck [punto]    # Forzar spawn en punto específico (1-4)
-
-# Proceso del Atraco
-1. Localizar camión blindado (blip en mapa)
-2. Interceptar y atacar el vehículo
-3. Eliminar a ambos guardias de seguridad
-4. Usar ox_target en guardia para coger llaves
-5. Usar ox_target en maletero para abrir
-6. Recoger recompensa (dinero negro)
-
-# Integración Policial  
-- Alerta automática a origen-police
-- Blip en mapa para todas las unidades
-- Mensaje de radio automático
-
-# Configuración de Dificultad
-- NPCAccuracy: 20 (fácil) - 80 (difícil)
-- RewardAmount: Ajustar según economía server
-- RequiredCops: Mínimo policías para spawns`
-            }
-        }; $1 ": " $5 " (Warning)"
-        } else {
-            print "✅ " $1 ": " $5 " (OK)"
-        }
-    }'
-}
-
-# Función principal
-main() {
-    clear
-    echo -e "${GREEN}=== System Monitor ===${NC}"
-    echo "Timestamp: $(date)"
-    echo "----------------------------------------"
-    
-    check_cpu
-    echo
-    check_memory
-    echo
-    check_disk
-    
-    echo "----------------------------------------"
-    echo -e "${GREEN}Monitoring completed${NC}"
-}
-
-# Ejecutar si es llamado directamente
-if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
-    # Ejecutar una vez o en loop
-    if [ "$1" == "--loop" ]; then
-        while true; do
-            main
-            sleep 300  # 5 minutos
-        done
-    else
-        main
-    fi
-fi`,
-                usage: `# Ejecutar una vez
-bash monitor.sh
-
-# Ejecutar en loop cada 5 minutos
-bash monitor.sh --loop`
-            }
-        };
-
-        // Función para mostrar modal
-        function showModal(scriptId) {
-            const modal = document.getElementById('codeModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-            
-            const script = scriptsData[scriptId];
-            if (!script) return;
-            
-            modalTitle.textContent = script.title;
-            modalBody.innerHTML = `
-                <p><strong>Descripción:</strong> ${script.description}</p>
-                <h3>📦 Instalación</h3>
-                <div class="code-block">
-                    <pre><code class="language-bash">${script.installation}</code></pre>
-                </div>
-                <h3>💻 Código</h3>
-                <div class="code-block">
-                    <pre><code class="language-${scriptId.includes('backup') || scriptId.includes('api') ? 'python' : 'bash'}">${script.code}</code></pre>
-                </div>
-                <h3>🚀 Uso</h3>
-                <div class="code-block">
-                    <pre><code class="language-bash">${script.usage}</code></pre>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            
-            // Re-highlight código
-            Prism.highlightAll();
-        }
-
-        // Función para cerrar modal
-        function closeModal() {
-            document.getElementById('codeModal').style.display = 'none';
-        }
-
-        // Cerrar modal al hacer click fuera
-        window.onclick = function(event) {
-            const modal = document.getElementById('codeModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
         // Función de búsqueda
         document.getElementById('searchBox').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
@@ -995,110 +483,5 @@ bash monitor.sh --loop`
             });
         });
     </script>
-
-<!-- INJECTED: Readme viewer (preserves original UI) -->
-<style>
-#readme-viewer { position: fixed; right: 20px; top: 80px; width: 420px; max-height: 70vh; overflow: auto; background: rgba(255,255,255,0.98); border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,0.12); padding: 16px; z-index: 9999; display: none; }
-#readme-viewer h2 { margin-top: 0; font-size: 18px; }
-#readme-viewer .close { position: absolute; right: 8px; top: 8px; cursor: pointer; font-weight: bold; }
-#readme-viewer pre { white-space: pre-wrap; }
-.readme-link { cursor: pointer; color: #0066cc; text-decoration: underline; }
-</style>
-<div id="readme-viewer" aria-hidden="true" role="dialog" aria-label="Visor de README">
-  <span class="close" title="Cerrar" onclick="document.getElementById('readme-viewer').style.display='none'">✕</span>
-  <h2 id="readme-title">README</h2>
-  <div id="readme-content"></div>
-</div>
-<script>
-// Readmes data (converted from markdown)
-const READMES = {};
-READMES["README_md"] = {"filename": "README.md", "html": "<h1>\ud83d\udcb0 PS Ask Money - Sistema de Mendicidad</h1>\n\n<p>Un script avanzado para FiveM que permite a los jugadores mendigar dinero con animaciones realistas y interacci\u00f3n con NPCs.</p>\n\n<h2>\ud83c\udf1f Caracter\u00edsticas</h2>\n\n<ul>\n<li><strong>Dos tipos de mendicidad</strong>: Tocar m\u00fasica y mostrar cartel</li>\n<li><strong>Animaciones realistas</strong> con props (guitarra y cartel)</li>\n<li><strong>NPCs interactivos</strong> que se acercan al jugador</li>\n<li><strong>Sistema de recompensas configurable</strong></li>\n<li><strong>Props de dinero visibles</strong> en el suelo</li>\n<li><strong>Integraci\u00f3n con ox_target</strong> para recoger dinero</li>\n<li><strong>Sistema de comandos</strong> f\u00e1cil de usar</li>\n<li><strong>Completamente configurable</strong></li>\n</ul>\n\n<h2>\ud83d\udccb Dependencias</h2>\n\n<ul>\n<li><strong>QBCore Framework</strong></li>\n<li><strong>ox_lib</strong> (para notificaciones y men\u00fas)</li>\n<li><strong>ox_target</strong> (para interacciones)</li>\n</ul>\n\n<h2>\ud83d\ude80 Instalaci\u00f3n</h2>\n\n<ol>\n<li>Descarga el script y col\u00f3calo en tu carpeta <code>resources</code></li>\n<li>Aseg\u00farate de tener las dependencias instaladas</li>\n<li>A\u00f1ade <code>ensure ps_askmoney</code> a tu <code>server.cfg</code></li>\n<li>Reinicia el servidor</li>\n</ol>\n\n<h2>\ud83c\udfae Comandos</h2>\n\n<p>| Comando | Descripci\u00f3n |\n|---------|-------------|\n| <code>/mendigar</code> | Abre el men\u00fa de mendicidad |\n| <code>/pararmendigar</code> | Detiene la mendicidad actual |</p>\n\n<h2>\u2699\ufe0f Configuraci\u00f3n</h2>\n\n<h3>Configuraci\u00f3n General</h3>\n\n<p><code>lua\nConfig.BeggingRadius = 25.0 -- Radio de detecci\u00f3n de NPCs\nConfig.MaxNPCs = 5 -- M\u00e1ximo NPCs que pueden acercarse\nConfig.MoneyDropChance = 80 -- Probabilidad de recibir dinero (%)\n</code></p>\n\n<h3>Recompensas</h3>\n\n<p><code>lua\nConfig.Rewards = {\n    item = 'money', -- Tipo de item ('money', 'black_money', etc.)\n    amount = {min = 1, max = 15}, -- Cantidad m\u00ednima y m\u00e1xima\n    itemLabel = 'Dinero' -- Etiqueta del item\n}\n</code></p>\n\n<h3>Animaciones Personalizables</h3>\n\n<p>Puedes modificar las animaciones en <code>Config.Animations</code>:\n- <strong>M\u00fasica</strong>: Toca guitarra con animaci\u00f3n completa\n- <strong>Cartel</strong>: Muestra cartel de mendigante</p>\n\n<h2>\ud83c\udfaf C\u00f3mo Funciona</h2>\n\n<ol>\n<li><strong>Iniciar mendicidad</strong>: Usa <code>/mendigar</code> y elige una opci\u00f3n</li>\n<li><strong>Atracci\u00f3n de NPCs</strong>: Los NPCs cercanos se acercar\u00e1n autom\u00e1ticamente</li>\n<li><strong>Recompensas</strong>: Los NPCs dejan dinero en el suelo (seg\u00fan probabilidad)</li>\n<li><strong>Recoger dinero</strong>: Usa <code>E</code> (ox_target) sobre los props de dinero</li>\n<li><strong>Finalizar</strong>: Usa <code>/pararmendigar</code> para detener</li>\n</ol>\n\n<h2>\ud83d\udee0\ufe0f Personalizaci\u00f3n</h2>\n\n<h3>A\u00f1adir Nuevas Animaciones</h3>\n\n<p><code>lua\nConfig.Animations.nuevo_tipo = {\n    type = 'nuevo_tipo',\n    label = '\ud83c\udfad Nueva Animaci\u00f3n',\n    dict = 'diccionario_animacion',\n    anim = 'nombre_animacion',\n    prop = 'nombre_prop', -- opcional\n    propBone = 12345,\n    propPos = {x = 0.0, y = 0.0, z = 0.0},\n    propRot = {x = 0.0, y = 0.0, z = 0.0}\n}\n</code></p>\n\n<h3>Modificar Props de Dinero</h3>\n\n<p><code>lua\nConfig.MoneyProps = {\n    'prop_cash_pile_01',\n    'prop_money_bag_01',\n    'tu_prop_personalizado'\n}\n</code></p>\n\n<h2>\ud83d\udc1b Soluci\u00f3n de Problemas</h2>\n\n<h3>Los NPCs no se acercan</h3>\n\n<ul>\n<li>Verifica que <code>Config.BeggingRadius</code> sea apropiado</li>\n<li>Aseg\u00farate de estar en una zona con NPCs</li>\n<li>Revisa que <code>Config.MaxNPCs</code> no sea 0</li>\n</ul>\n\n<h3>No aparecen props de dinero</h3>\n\n<ul>\n<li>Verifica <code>Config.MoneyDropChance</code> (debe ser &gt; 0)</li>\n<li>Comprueba que los props en <code>Config.MoneyProps</code> existan</li>\n<li>Revisa la consola por errores de modelos</li>\n</ul>\n\n<h3>Comandos no funcionan</h3>\n\n<ul>\n<li>Verifica que ox_lib est\u00e9 instalado correctamente</li>\n<li>Comprueba permisos de comandos</li>\n<li>Revisa la consola por errores</li>\n</ul>\n\n<h2>\ud83d\udcdd Comandos de Admin</h2>\n\n<p>| Comando | Descripci\u00f3n | Permiso |\n|---------|-------------|---------|\n| <code>/stopbegging [id]</code> | Detiene la mendicidad de un jugador | admin |</p>\n\n<h2>\ud83d\udd27 Integraci\u00f3n con Otros Frameworks</h2>\n\n<p>Para usar con <strong>ESX</strong>, modifica en <code>config.lua</code>:\n<code>lua\nConfig.Framework = 'es'\n</code></p>\n\n<p>Y ajusta las funciones en <code>client.lua</code> y <code>server.lua</code> seg\u00fan sea necesario.</p>\n\n<h2>\ud83d\udcca Registro de Actividad</h2>\n\n<p>El script registra autom\u00e1ticamente:\n- Jugador que recibe dinero\n- Cantidad recibida\n- Tipo de item\n- Timestamp</p>\n\n<h2>\ud83c\udfa8 Caracter\u00edsticas Avanzadas</h2>\n\n<ul>\n<li><strong>Sistema anti-spam</strong>: Previene uso excesivo</li>\n<li><strong>Limpieza autom\u00e1tica</strong>: Los props desaparecen despu\u00e9s de 60s</li>\n<li><strong>Optimizaci\u00f3n</strong>: Uso eficiente de recursos</li>\n<li><strong>Detecci\u00f3n inteligente</strong>: Solo afecta NPCs v\u00e1lidos</li>\n</ul>\n\n<h2>\ud83d\udcde Soporte</h2>\n\n<p>Para soporte y actualizaciones, contacta al desarrollador o revisa el repositorio del proyecto.</p>\n\n<h2>\ud83d\udcc4 Licencia</h2>\n\n<p>Este proyecto est\u00e1 bajo licencia MIT. Puedes modificarlo y distribuirlo libremente.</p>\n\n<hr />\n\n<p><strong>\u00a1Disfruta del script y que tus jugadores tengan una experiencia de mendicidad realista!</strong> \ud83c\udfae</p>\n", "text": "\ud83d\udcb0 ps ask money - sistema de mendicidad\n\nun script avanzado para fivem que permite a los jugadores mendigar dinero con animaciones realistas y interacci\u00f3n con npcs.\n\n\ud83c\udf1f caracter\u00edsticas\n\n\ndos tipos de mendicidad: tocar m\u00fasica y mostrar cartel\nanimaciones realistas con props (guitarra y cartel)\nnpcs interactivos que se acercan al jugador\nsistema de recompensas configurable\nprops de dinero visibles en el suelo\nintegraci\u00f3n con ox_target para recoger dinero\nsistema de comandos f\u00e1cil de usar\ncompletamente configurable\n\n\n\ud83d\udccb dependencias\n\n\nqbcore framework\nox_lib (para notificaciones y men\u00fas)\nox_target (para interacciones)\n\n\n\ud83d\ude80 instalaci\u00f3n\n\n\ndescarga el script y col\u00f3calo en tu carpeta resources\naseg\u00farate de tener las dependencias instaladas\na\u00f1ade ensure ps_askmoney a tu server.cfg\nreinicia el servidor\n\n\n\ud83c\udfae comandos\n\n| comando | descripci\u00f3n |\n|---------|-------------|\n| /mendigar | abre el men\u00fa de mendicidad |\n| /pararmendigar | detiene la mendicidad actual |\n\n\u2699\ufe0f configuraci\u00f3n\n\nconfiguraci\u00f3n general\n\nlua\nconfig.beggingradius = 25.0 -- radio de detecci\u00f3n de npcs\nconfig.maxnpcs = 5 -- m\u00e1ximo npcs que pueden acercarse\nconfig.moneydropchance = 80 -- probabilidad de recibir dinero (%)\n\n\nrecompensas\n\nlua\nconfig.rewards = {\n    item = 'money', -- tipo de item ('money', 'black_money', etc.)\n    amount = {min = 1, max = 15}, -- cantidad m\u00ednima y m\u00e1xima\n    itemlabel = 'dinero' -- etiqueta del item\n}\n\n\nanimaciones personalizables\n\npuedes modificar las animaciones en config.animations:\n- m\u00fasica: toca guitarra con animaci\u00f3n completa\n- cartel: muestra cartel de mendigante\n\n\ud83c\udfaf c\u00f3mo funciona\n\n\niniciar mendicidad: usa /mendigar y elige una opci\u00f3n\natracci\u00f3n de npcs: los npcs cercanos se acercar\u00e1n autom\u00e1ticamente\nrecompensas: los npcs dejan dinero en el suelo (seg\u00fan probabilidad)\nrecoger dinero: usa e (ox_target) sobre los props de dinero\nfinalizar: usa /pararmendigar para detener\n\n\n\ud83d\udee0\ufe0f personalizaci\u00f3n\n\na\u00f1adir nuevas animaciones\n\nlua\nconfig.animations.nuevo_tipo = {\n    type = 'nuevo_tipo',\n    label = '\ud83c\udfad nueva animaci\u00f3n',\n    dict = 'diccionario_animacion',\n    anim = 'nombre_animacion',\n    prop = 'nombre_prop', -- opcional\n    propbone = 12345,\n    proppos = {x = 0.0, y = 0.0, z = 0.0},\n    proprot = {x = 0.0, y = 0.0, z = 0.0}\n}\n\n\nmodificar props de dinero\n\nlua\nconfig.moneyprops = {\n    'prop_cash_pile_01',\n    'prop_money_bag_01',\n    'tu_prop_personalizado'\n}\n\n\n\ud83d\udc1b soluci\u00f3n de problemas\n\nlos npcs no se acercan\n\n\nverifica que config.beggingradius sea apropiado\naseg\u00farate de estar en una zona con npcs\nrevisa que config.maxnpcs no sea 0\n\n\nno aparecen props de dinero\n\n\nverifica config.moneydropchance (debe ser &gt; 0)\ncomprueba que los props en config.moneyprops existan\nrevisa la consola por errores de modelos\n\n\ncomandos no funcionan\n\n\nverifica que ox_lib est\u00e9 instalado correctamente\ncomprueba permisos de comandos\nrevisa la consola por errores\n\n\n\ud83d\udcdd comandos de admin\n\n| comando | descripci\u00f3n | permiso |\n|---------|-------------|---------|\n| /stopbegging [id] | detiene la mendicidad de un jugador | admin |\n\n\ud83d\udd27 integraci\u00f3n con otros frameworks\n\npara usar con esx, modifica en config.lua:\nlua\nconfig.framework = 'es'\n\n\ny ajusta las funciones en client.lua y server.lua seg\u00fan sea necesario.\n\n\ud83d\udcca registro de actividad\n\nel script registra autom\u00e1ticamente:\n- jugador que recibe dinero\n- cantidad recibida\n- tipo de item\n- timestamp\n\n\ud83c\udfa8 caracter\u00edsticas avanzadas\n\n\nsistema anti-spam: previene uso excesivo\nlimpieza autom\u00e1tica: los props desaparecen despu\u00e9s de 60s\noptimizaci\u00f3n: uso eficiente de recursos\ndetecci\u00f3n inteligente: solo afecta npcs v\u00e1lidos\n\n\n\ud83d\udcde soporte\n\npara soporte y actualizaciones, contacta al desarrollador o revisa el repositorio del proyecto.\n\n\ud83d\udcc4 licencia\n\neste proyecto est\u00e1 bajo licencia mit. puedes modificarlo y distribuirlo libremente.\n\n\n\n\u00a1disfruta del script y que tus jugadores tengan una experiencia de mendicidad realista! \ud83c\udfae\n"};
-READMES["readme1_md"] = {"filename": "readme1.md", "html": "<h1>\ud83d\udee1\ufe0f Advanced AntiCheat System para FiveM</h1>\n\n<p>Sistema anti-cheat avanzado para servidores FiveM con detecci\u00f3n de men\u00fas en pantalla, verificaci\u00f3n de eventos seguros y detecci\u00f3n de props an\u00f3malas. <strong>Incluye sistema completo de base de datos</strong>.</p>\n\n<h2>\ud83c\udf1f Caracter\u00edsticas Principales</h2>\n\n<h3>\ud83d\udcf8 Detecci\u00f3n de Men\u00fas en Pantalla (Anti On-Screen Menu)</h3>\n\n<ul>\n<li>Toma capturas de pantalla peri\u00f3dicamente y las analiza</li>\n<li>Detecta men\u00fas tipo <em>lua menu</em> autom\u00e1ticamente</li>\n<li>Sanci\u00f3n autom\u00e1tica al detectar men\u00fas de trampas</li>\n<li>Compatible con FiveGuard.de+1</li>\n</ul>\n\n<h3>\ud83d\udd12 Safe Events Verification System</h3>\n\n<ul>\n<li>Verifica eventos \"seguros\" para prevenir exploits</li>\n<li>Bloquea eventos maliciosos como spawn de dinero</li>\n<li>Lista negra y blanca de eventos personalizable</li>\n<li>Detecci\u00f3n de cantidades sospechosas</li>\n</ul>\n\n<h3>\ud83e\uddca Detecci\u00f3n de Props/Entidades An\u00f3malas (AI Props Detection)</h3>\n\n<ul>\n<li>Detecta comportamiento inusual en spawn de props</li>\n<li>Control de l\u00edmites por jugador</li>\n<li>Blacklist de modelos prohibidos</li>\n<li>Previene spam de objetos que afecten el rendimiento</li>\n</ul>\n\n<h3>\ud83d\uddc4\ufe0f <strong>NUEVO: Sistema Completo de Base de Datos</strong></h3>\n\n<ul>\n<li><strong>Almacenamiento persistente</strong> de violaciones y bans</li>\n<li><strong>Sistema de bans</strong> con duraci\u00f3n temporal y permanente</li>\n<li><strong>Whitelist</strong> con razones y administradores responsables</li>\n<li><strong>Estad\u00edsticas avanzadas</strong> y reportes detallados</li>\n<li><strong>Trust Score</strong> autom\u00e1tico para jugadores</li>\n<li><strong>Logs completos</strong> del sistema</li>\n<li><strong>Capturas de pantalla</strong> con metadata</li>\n</ul>\n\n<h2>\ud83d\udce6 Archivos del Sistema</h2>\n\n<p><code>\nadvanced-anticheat/\n\u251c\u2500\u2500 fxmanifest.lua          # Manifest del resource\n\u251c\u2500\u2500 config.lua              # Configuraci\u00f3n completa\n\u251c\u2500\u2500 server.lua              # L\u00f3gica principal del servidor\n\u251c\u2500\u2500 client.lua              # Detecciones cliente\n\u251c\u2500\u2500 database.lua            # Sistema de base de datos\n\u251c\u2500\u2500 anticheat_install.sql   # Script de instalaci\u00f3n BD\n\u251c\u2500\u2500 ui/\n\u2502   \u2514\u2500\u2500 index.html          # Panel de administraci\u00f3n\n\u2514\u2500\u2500 README.md              # Esta gu\u00eda\n</code></p>\n\n<h2>\ud83d\ude80 Instalaci\u00f3n</h2>\n\n<h3>Paso 1: Preparar la Base de Datos</h3>\n\n<p><strong>IMPORTANTE: Configura primero la base de datos antes de instalar el resource.</strong></p>\n\n<h4>Opci\u00f3n A: MySQL/MariaDB (Recomendado)</h4>\n\n<ol>\n<li><p>Ejecuta el archivo <code>anticheat_install.sql</code> en tu base de datos:\n<code>sql\nmysql -u tu_usuario -p tu_base_de_datos &lt; anticheat_install.sql\n</code></p></li>\n<li><p>Instala uno de estos resources de MySQL:</p>\n\n<ul>\n<li><code>mysql-async</code> (m\u00e1s com\u00fan)</li>\n<li><code>oxmysql</code> (m\u00e1s moderno)  </li>\n<li><code>ghmattimysql</code> (legacy)</li>\n</ul></li>\n</ol>\n\n<p>```bash</p>\n\n<h1>En tu server.cfg</h1>\n\n<p>ensure mysql-async  # O el que prefieras\n```</p>\n\n<h4>Opci\u00f3n B: Sin Base de Datos</h4>\n\n<p>Si no quieres usar base de datos, configura en <code>config.lua</code>:\n<code>lua\nConfig.General.UseDatabase = false\n</code></p>\n\n<h3>Paso 2: Instalar el Resource</h3>\n\n<ol>\n<li>Descarga todos los archivos del sistema</li>\n<li>Crea carpeta <code>advanced-anticheat</code> en <code>resources/[anticheat]/</code></li>\n<li>Copia todos los archivos a la carpeta</li>\n</ol>\n\n<h3>Paso 3: Configurar el Sistema</h3>\n\n<p>Edita <code>config.lua</code>:\n```lua\n-- Habilitar base de datos\nConfig.General.UseDatabase = true\nConfig.General.DatabaseType = \"mysql\"  -- mysql o sqlite</p>\n\n<p>-- Configurar tu servidor\nConfig.General.ServerName = \"Mi Servidor RP\"</p>\n\n<p>-- Configurar capturas\nConfig.Screenshot.Enabled = true\nConfig.Screenshot.WebhookURL = \"tu<em>webhook</em>discord\"  -- Opcional</p>\n\n<p>-- Configurar detecciones\nConfig.SafeEvents.Enabled = true\nConfig.PropsDetection.Enabled = true\n```</p>\n\n<h3>Paso 4: Permisos y Server.cfg</h3>\n\n<p>A\u00f1ade a tu <code>server.cfg</code>:\n```cfg</p>\n\n<h1>Dependencias</h1>\n\n<p>ensure mysql-async          # O tu system de MySQL\nensure screenshot-basic     # Para capturas\nensure advanced-anticheat</p>\n\n<h1>Permisos b\u00e1sicos</h1>\n\n<p>add<em>ace group.admin anticheat.admin allow\nadd</em>ace group.admin anticheat.notify allow\nadd_ace group.mod anticheat.view allow</p>\n\n<h1>Exenciones para staff (opcional)</h1>\n\n<p>add_ace identifier.steam:110000100000000 anticheat.exempt allow\n```</p>\n\n<h3>Paso 5: Primera Ejecuci\u00f3n</h3>\n\n<ol>\n<li>Reinicia el servidor</li>\n<li>Usa <code>/anticheat:status</code> para verificar funcionamiento</li>\n<li>Usa <code>/ac</code> para abrir el panel de admin</li>\n<li>Configura seg\u00fan tus necesidades</li>\n</ol>\n\n<h2>\ud83d\uddc4\ufe0f Sistema de Base de Datos</h2>\n\n<h3>Tablas Principales</h3>\n\n<p>| Tabla | Descripci\u00f3n |\n|-------|-------------|\n| <code>anticheat_violations</code> | Todas las violaciones detectadas |\n| <code>anticheat_bans</code> | Bans temporales y permanentes |\n| <code>anticheat_players</code> | Informaci\u00f3n de jugadores |\n| <code>anticheat_stats</code> | Estad\u00edsticas diarias |\n| <code>anticheat_logs</code> | Logs del sistema |\n| <code>anticheat_screenshots</code> | Metadata de capturas |\n| <code>anticheat_config</code> | Configuraciones din\u00e1micas |</p>\n\n<h3>Funcionalidades de BD</h3>\n\n<ul>\n<li><strong>Bans Autom\u00e1ticos</strong>: Sistema progresivo de sanciones</li>\n<li><strong>Whitelist Persistente</strong>: Exenciones permanentes con razones  </li>\n<li><strong>Trust Score</strong>: Puntuaci\u00f3n autom\u00e1tica de confianza (0-100)</li>\n<li><strong>Estad\u00edsticas</strong>: Reportes detallados de violaciones</li>\n<li><strong>Cleanup Autom\u00e1tico</strong>: Limpieza de datos antiguos</li>\n<li><strong>Backups</strong>: Vistas y procedimientos para reportes</li>\n</ul>\n\n<h2>\u2699\ufe0f Configuraci\u00f3n Avanzada</h2>\n\n<h3>Configuraci\u00f3n de Base de Datos</h3>\n\n<p><code>lua\nConfig.General = {\n    UseDatabase = true,\n    DatabaseType = \"mysql\",  -- mysql o sqlite\n    MaxViolations = 5,       -- Violaciones antes de ban autom\u00e1tico\n    StatsSaveInterval = 300000  -- Guardar stats cada 5 min\n}\n</code></p>\n\n<h3>Sistema de Sanciones Progresivas</h3>\n\n<p><code>lua\nConfig.Sanctions.Progressive = {\n    Enabled = true,\n    Rules = {\n        Critical = {  -- ONSCREEN_MENU, AIMBOT, etc.\n            Actions = {\"SCREENSHOT\", \"TEMP_BAN\", \"BAN\"}\n        },\n        Severe = {    -- BLACKLISTED_PROP, INFINITE_AMMO, etc.\n            Actions = {\"WARNING\", \"KICK\", \"TEMP_BAN\", \"BAN\"}\n        },\n        Minor = {     -- SPEED_ANOMALY, TOO_MANY_PROPS, etc.\n            Actions = {\"WARNING\", \"WARNING\", \"KICK\", \"TEMP_BAN\"}\n        }\n    }\n}\n</code></p>\n\n<h3>Configuraci\u00f3n de Screenshots con BD</h3>\n\n<p><code>lua\nConfig.Screenshot = {\n    StorePath = \"screenshots/\",\n    WebhookURL = \"https://discord.com/api/webhooks/...\",\n    AIAnalysis = true,\n    AutoScreenshotOnViolation = true  -- Screenshot autom\u00e1tico en violaciones\n}\n</code></p>\n\n<h2>\ud83c\udfae Comandos con Base de Datos</h2>\n\n<h3>Administradores</h3>\n\n<p><code>\n/ac                              - Panel de administraci\u00f3n web\n/anticheat:status               - Estad\u00edsticas del sistema (incluye BD)\n/anticheat:whitelist &lt;id&gt; [raz\u00f3n] - A\u00f1adir a whitelist permanente\n/anticheat:unban &lt;steam_id&gt;      - Desbanear jugador\n/anticheat:playerinfo &lt;id&gt;       - Ver historial completo del jugador\n</code></p>\n\n<h3>Moderadores</h3>\n\n<p><code>\n/anticheat:playerinfo &lt;id&gt;  - Ver info b\u00e1sica del jugador\n</code></p>\n\n<h2>\ud83d\udcca Panel de Administraci\u00f3n Mejorado</h2>\n\n<p>El panel web ahora incluye:\n- <strong>Estad\u00edsticas en tiempo real</strong> desde la base de datos\n- <strong>Historial de violaciones</strong> con filtros\n- <strong>Lista de bans activos</strong> con fechas de expiraci\u00f3n\n- <strong>Trust Score</strong> de jugadores\n- <strong>Gr\u00e1ficos de tendencias</strong> de violaciones\n- <strong>Gesti\u00f3n de whitelist</strong> con razones\n- <strong>Logs del sistema</strong> en tiempo real</p>\n\n<h3>Acceder al Panel</h3>\n\n<ol>\n<li>Usa <code>/ac</code> en el juego (requiere permiso <code>anticheat.admin</code>)</li>\n<li>Navega por las pesta\u00f1as: Violaciones, Monitor, Configuraci\u00f3n</li>\n<li>Selecciona jugadores para aplicar acciones</li>\n<li>Revisa estad\u00edsticas y logs</li>\n</ol>\n\n<h2>\ud83d\udd27 Integraci\u00f3n con Frameworks</h2>\n\n<h3>ESX con Base de Datos</h3>\n\n<p><code>lua\nConfig.Integrations.ESX = {\n    Enabled = true,\n    MoneyEvents = true,  -- Monitorear eventos de dinero\n    ItemEvents = true,   -- Monitorear items\n    JobEvents = true     -- Monitorear trabajos\n}\n</code></p>\n\n<h3>QBCore con Base de Datos</h3>\n\n<p><code>lua\nConfig.Integrations.QBCore = {\n    Enabled = true,\n    MoneyEvents = true,\n    ItemEvents = true,\n    JobEvents = true\n}\n</code></p>\n\n<h2>\ud83d\udcc8 Consultas \u00datiles</h2>\n\n<h3>Ver Top Violadores de la Semana</h3>\n\n<p><code>sql\nSELECT player_name, COUNT(*) as violations \nFROM anticheat_violations \nWHERE timestamp &gt;= DATE_SUB(NOW(), INTERVAL 7 DAY)\nGROUP BY player_identifier, player_name \nORDER BY violations DESC LIMIT 10;\n</code></p>\n\n<h3>Ver Jugadores con Bajo Trust Score</h3>\n\n<p><code>sql\nSELECT player_name, total_violations, trust_score, last_violation\nFROM anticheat_players \nWHERE trust_score &lt; 20 AND total_violations &gt; 0 AND NOT is_whitelisted\nORDER BY trust_score ASC;\n</code></p>\n\n<h3>Estad\u00edsticas de Efectividad</h3>\n\n<p><code>sql\nSELECT \n    violation_type,\n    COUNT(*) as total,\n    COUNT(CASE WHEN action_taken = 'BAN' THEN 1 END) as bans\nFROM anticheat_violations \nWHERE timestamp &gt;= DATE_SUB(NOW(), INTERVAL 30 DAY)\nGROUP BY violation_type;\n</code></p>\n\n<h2>\ud83d\udd04 Mantenimiento Autom\u00e1tico</h2>\n\n<p>La base de datos incluye:\n- <strong>Cleanup autom\u00e1tico</strong> de datos antiguos (90 d\u00edas violaciones, 30 d\u00edas logs)\n- <strong>Estad\u00edsticas diarias</strong> generadas autom\u00e1ticamente\n- <strong>Desactivaci\u00f3n</strong> de bans temporales expirados\n- <strong>Actualizaci\u00f3n</strong> autom\u00e1tica de Trust Scores</p>\n\n<h2>\ud83d\udea8 Migraci\u00f3n desde Versi\u00f3n Sin BD</h2>\n\n<p>Si ten\u00edas el AntiCheat sin base de datos:</p>\n\n<ol>\n<li><strong>Backup</strong>: Respalda tu configuraci\u00f3n actual</li>\n<li><strong>Instalar BD</strong>: Ejecuta el script SQL</li>\n<li><strong>Configurar</strong>: Cambia <code>UseDatabase = true</code> </li>\n<li><strong>Reiniciar</strong>: Reinicia el resource</li>\n<li><strong>Verificar</strong>: Los datos nuevos se guardar\u00e1n en BD</li>\n</ol>\n\n<h2>\ud83d\udee0\ufe0f Soluci\u00f3n de Problemas</h2>\n\n<h3>Error: \"Base de datos no disponible\"</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Verifica que mysql-async/oxmysql est\u00e9 funcionando y las tablas creadas.</p>\n\n<h3>Error: \"Tabla no existe\"</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Ejecuta el script <code>anticheat_install.sql</code> completo.</p>\n\n<h3>Panel web no funciona con BD</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Verifica permisos <code>anticheat.admin</code> y conexi\u00f3n a BD.</p>\n\n<h3>Rendimiento con BD</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Ajusta <code>Config.Performance.Intervals</code> para reducir consultas.</p>\n\n<h2>\ud83d\udcca Monitoreo de Rendimiento</h2>\n\n<p>Con base de datos habilitada, monitorea:\n- <strong>Consultas/segundo</strong>: No deber\u00eda exceder 10-20\n- <strong>Latencia BD</strong>: Mantener bajo 50ms\n- <strong>Tama\u00f1o tablas</strong>: Limpieza autom\u00e1tica cada 24h\n- <strong>Memoria</strong>: ~50-100MB adicionales con BD</p>\n\n<h2>\ud83d\udd10 Seguridad de la Base de Datos</h2>\n\n<ul>\n<li><strong>Acceso restrictivo</strong>: Solo el resource debe acceder a las tablas</li>\n<li><strong>Validaci\u00f3n</strong>: Todos los inputs son sanitizados  </li>\n<li><strong>Logs auditables</strong>: Todas las acciones se registran</li>\n<li><strong>Backup regular</strong>: Respalda las tablas del AntiCheat</li>\n<li><strong>Cleanup</strong>: Datos antiguos se eliminan autom\u00e1ticamente</li>\n</ul>\n\n<hr />\n\n<h2>\ud83d\ude80 Instalaci\u00f3n R\u00e1pida con Base de Datos</h2>\n\n<p>```bash</p>\n\n<h1>1. Crear base de datos</h1>\n\n<p>mysql -u root -p -e \"CREATE DATABASE anticheat_db;\"</p>\n\n<h1>2. Instalar tablas</h1>\n\n<p>mysql -u root -p anticheat<em>db &lt; anticheat</em>install.sql</p>\n\n<h1>3. Configurar server.cfg</h1>\n\n<p>echo \"ensure mysql-async\" &gt;&gt; server.cfg\necho \"ensure advanced-anticheat\" &gt;&gt; server.cfg</p>\n\n<h1>4. Configurar permisos</h1>\n\n<p>echo \"add_ace group.admin anticheat.admin allow\" &gt;&gt; server.cfg</p>\n\n<h1>5. Reiniciar servidor y usar /ac</h1>\n\n<p>```</p>\n\n<p>\u00a1Tu servidor ahora tiene el sistema AntiCheat m\u00e1s avanzado con base de datos completa! \ud83d\udee1\ufe0f\u2728</p>\n\n<h2>\u2699\ufe0f Configuraci\u00f3n Avanzada</h2>\n\n<h3>Sistema de Capturas de Pantalla</h3>\n\n<p><code>lua\nConfig.Screenshot = {\n    Enabled = true,\n    Interval = 30000,        -- 30 segundos entre capturas\n    Quality = 0.8,           -- Calidad de imagen (0.1-1.0)\n    AIAnalysis = true,       -- An\u00e1lisis autom\u00e1tico\n    WebhookURL = \"tu_webhook\" -- Discord webhook (opcional)\n}\n</code></p>\n\n<h3>Eventos Seguros</h3>\n\n<p><code>lua\nConfig.SafeEvents = {\n    BlacklistedEvents = {\n        \"esx:addMoney\",\n        \"banking:addMoney\",\n        \"spawn_money\"\n        -- A\u00f1adir m\u00e1s eventos seg\u00fan tu servidor\n    },\n    SuspiciousAmounts = {\n        Money = 1000000,  -- Cantidades sospechosas\n        Items = 100\n    }\n}\n</code></p>\n\n<h3>Detecci\u00f3n de Props</h3>\n\n<p><code>lua\nConfig.PropsDetection = {\n    MaxPropsPerPlayer = 50,\n    BlacklistedProps = {\n        \"prop_money_bag_01\",\n        \"prop_cash_pile_01\"\n        -- A\u00f1adir props prohibidos\n    }\n}\n</code></p>\n\n<h2>\ud83c\udfae Uso del Sistema</h2>\n\n<h3>Comandos de Administrador</h3>\n\n<p><code>\n/ac                    - Abrir panel de administraci\u00f3n\n/anticheat:status      - Ver estad\u00edsticas del sistema\n/anticheat:whitelist   - A\u00f1adir jugador a whitelist\n</code></p>\n\n<h3>Panel de Administraci\u00f3n</h3>\n\n<ul>\n<li><strong>F5</strong>: Actualizar datos</li>\n<li><strong>ESC</strong>: Cerrar panel</li>\n<li>Clic en jugador para seleccionar y aplicar acciones</li>\n</ul>\n\n<h3>Acciones Disponibles</h3>\n\n<ul>\n<li><strong>\ud83d\udcf7 Screenshot</strong>: Tomar captura manual</li>\n<li><strong>\u26a0\ufe0f Kick</strong>: Expulsar jugador</li>\n<li><strong>\ud83d\udd28 Ban</strong>: Banear permanente</li>\n<li><strong>\u2705 Whitelist</strong>: Exentar de detecciones</li>\n</ul>\n\n<h2>\ud83d\udd27 Integraci\u00f3n con Frameworks</h2>\n\n<h3>ESX</h3>\n\n<p>El sistema detecta autom\u00e1ticamente ESX y monitorea:\n- Eventos de dinero (<code>esx:addMoney</code>, etc.)\n- Items del inventario\n- Trabajos y rangos</p>\n\n<h3>QBCore</h3>\n\n<p>Compatible con QBCore para:\n- Sistema de dinero\n- Items y inventario\n- Trabajos y permisos</p>\n\n<h3>Standalone</h3>\n\n<p>Funciona sin framework, con detecciones b\u00e1sicas.</p>\n\n<h2>\ud83d\udcca Sistema de Sanciones</h2>\n\n<h3>Sanciones Progresivas</h3>\n\n<ol>\n<li><strong>Primera violaci\u00f3n</strong>: Advertencia</li>\n<li><strong>Segunda violaci\u00f3n</strong>: Kick</li>\n<li><strong>Tercera violaci\u00f3n</strong>: Ban temporal</li>\n<li><strong>Cuarta violaci\u00f3n</strong>: Ban permanente</li>\n</ol>\n\n<h3>Tipos de Violaciones</h3>\n\n<ul>\n<li><strong>Cr\u00edticas</strong>: ONSCREEN<em>MENU, AIMBOT, GOD</em>MODE</li>\n<li><strong>Graves</strong>: BLACKLISTED<em>PROP, INFINITE</em>AMMO</li>\n<li><strong>Leves</strong>: SPEED<em>ANOMALY, TOO</em>MANY_PROPS</li>\n</ul>\n\n<h2>\ud83d\udd0d Logs y Monitoreo</h2>\n\n<h3>Archivo de Logs</h3>\n\n<p><code>\nlogs/anticheat/\n\u251c\u2500\u2500 violations_2024-01-01.log\n\u251c\u2500\u2500 actions_2024-01-01.log\n\u2514\u2500\u2500 system_2024-01-01.log\n</code></p>\n\n<h3>Discord Webhooks</h3>\n\n<p>Configura webhooks para recibir alertas:\n<code>lua\nConfig.Logging.Discord = {\n    Enabled = true,\n    WebhookURL = \"tu_webhook_discord\",\n    SendViolations = true\n}\n</code></p>\n\n<h2>\ud83d\udea8 Tipos de Detecci\u00f3n</h2>\n\n<h3>1. Men\u00fas en Pantalla</h3>\n\n<ul>\n<li>Patrones de texto sospechosos</li>\n<li>An\u00e1lisis de capturas autom\u00e1tico</li>\n<li>Detecci\u00f3n de overlays de men\u00fas</li>\n</ul>\n\n<h3>2. Eventos Maliciosos</h3>\n\n<ul>\n<li>Interceptaci\u00f3n de eventos del servidor</li>\n<li>Verificaci\u00f3n de par\u00e1metros</li>\n<li>Bloqueo de exploits conocidos</li>\n</ul>\n\n<h3>3. Props An\u00f3malos</h3>\n\n<ul>\n<li>L\u00edmites de spawning</li>\n<li>Modelos prohibidos</li>\n<li>Detecci\u00f3n de spam</li>\n</ul>\n\n<h3>4. Modificaciones del Jugador</h3>\n\n<ul>\n<li>God Mode</li>\n<li>Armadura infinita</li>\n<li>Velocidad an\u00f3mala</li>\n<li>Munici\u00f3n infinita</li>\n<li>Teletransporte</li>\n</ul>\n\n<h2>\ud83d\udee0\ufe0f Soluci\u00f3n de Problemas</h2>\n\n<h3>Problema: Screenshots no funcionan</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Verificar que <code>screenshot-basic</code> est\u00e9 instalado y funcionando.</p>\n\n<h3>Problema: UI no se abre</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Verificar permisos ACE y que el jugador tenga <code>anticheat.admin</code>.</p>\n\n<h3>Problema: Muchos falsos positivos</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Ajustar configuraci\u00f3n en <code>config.lua</code> y a\u00f1adir exenciones.</p>\n\n<h3>Problema: Alto uso de CPU</h3>\n\n<p><strong>Soluci\u00f3n</strong>: Aumentar intervalos de detecci\u00f3n en configuraci\u00f3n de rendimiento.</p>\n\n<h2>\ud83d\udcc8 Optimizaci\u00f3n de Rendimiento</h2>\n\n<h3>Configuraci\u00f3n Recomendada</h3>\n\n<p><code>lua\nConfig.Performance = {\n    MaxCPUUsage = 2.0,     -- ms por frame\n    DynamicLimits = true,   -- Ajustar seg\u00fan jugadores\n    Intervals = {\n        PlayerScan = 2000,   -- Menos frecuente con muchos jugadores\n        EntityScan = 3000\n    }\n}\n</code></p>\n\n<h3>Servidores con 64+ Jugadores</h3>\n\n<ul>\n<li>Aumentar intervalos de escaneo</li>\n<li>Activar l\u00edmites din\u00e1micos</li>\n<li>Considerar deshabilitar algunas detecciones menos cr\u00edticas</li>\n</ul>\n\n<h2>\ud83d\udd04 Actualizaciones</h2>\n\n<h3>Versi\u00f3n 1.0.0</h3>\n\n<ul>\n<li>Sistema base con todas las caracter\u00edsticas</li>\n<li>UI de administraci\u00f3n completa</li>\n<li>Detecci\u00f3n de men\u00fas, eventos y props</li>\n<li>Sistema de sanciones progresivas</li>\n</ul>\n\n<h3>Futuras Versiones</h3>\n\n<ul>\n<li>Machine Learning para detecci\u00f3n avanzada</li>\n<li>Integraci\u00f3n con m\u00e1s sistemas de bans</li>\n<li>API para otros recursos</li>\n<li>An\u00e1lisis de comportamiento</li>\n</ul>\n\n<h2>\ud83e\udd1d Soporte</h2>\n\n<p>Para soporte t\u00e9cnico:\n1. Verifica la configuraci\u00f3n\n2. Revisa los logs de errores\n3. Comprueba las dependencias\n4. Consulta la documentaci\u00f3n</p>\n\n<h2>\ud83d\udcc4 Licencia</h2>\n\n<p>Sistema desarrollado para servidores FiveM.\nPersonalizaci\u00f3n y modificaci\u00f3n permitidas.</p>\n\n<hr />\n\n<h2>\ud83d\ude80 Instalaci\u00f3n R\u00e1pida</h2>\n\n<p>```bash</p>\n\n<h1>1. Descargar archivos en resources/advanced-anticheat/</h1>\n\n<h1>2. A\u00f1adir a server.cfg:</h1>\n\n<p>ensure screenshot-basic\nensure advanced-anticheat</p>\n\n<h1>3. Reiniciar servidor</h1>\n\n<h1>4. Usar /ac para abrir panel de admin</h1>\n\n<p>```</p>\n\n<p>\u00a1Tu servidor ahora est\u00e1 protegido por el Advanced AntiCheat System! \ud83d\udee1\ufe0f</p>\n", "text": "\ud83d\udee1\ufe0f advanced anticheat system para fivem\n\nsistema anti-cheat avanzado para servidores fivem con detecci\u00f3n de men\u00fas en pantalla, verificaci\u00f3n de eventos seguros y detecci\u00f3n de props an\u00f3malas. incluye sistema completo de base de datos.\n\n\ud83c\udf1f caracter\u00edsticas principales\n\n\ud83d\udcf8 detecci\u00f3n de men\u00fas en pantalla (anti on-screen menu)\n\n\ntoma capturas de pantalla peri\u00f3dicamente y las analiza\ndetecta men\u00fas tipo lua menu autom\u00e1ticamente\nsanci\u00f3n autom\u00e1tica al detectar men\u00fas de trampas\ncompatible con fiveguard.de+1\n\n\n\ud83d\udd12 safe events verification system\n\n\nverifica eventos \"seguros\" para prevenir exploits\nbloquea eventos maliciosos como spawn de dinero\nlista negra y blanca de eventos personalizable\ndetecci\u00f3n de cantidades sospechosas\n\n\n\ud83e\uddca detecci\u00f3n de props/entidades an\u00f3malas (ai props detection)\n\n\ndetecta comportamiento inusual en spawn de props\ncontrol de l\u00edmites por jugador\nblacklist de modelos prohibidos\npreviene spam de objetos que afecten el rendimiento\n\n\n\ud83d\uddc4\ufe0f nuevo: sistema completo de base de datos\n\n\nalmacenamiento persistente de violaciones y bans\nsistema de bans con duraci\u00f3n temporal y permanente\nwhitelist con razones y administradores responsables\nestad\u00edsticas avanzadas y reportes detallados\ntrust score autom\u00e1tico para jugadores\nlogs completos del sistema\ncapturas de pantalla con metadata\n\n\n\ud83d\udce6 archivos del sistema\n\n\nadvanced-anticheat/\n\u251c\u2500\u2500 fxmanifest.lua          # manifest del resource\n\u251c\u2500\u2500 config.lua              # configuraci\u00f3n completa\n\u251c\u2500\u2500 server.lua              # l\u00f3gica principal del servidor\n\u251c\u2500\u2500 client.lua              # detecciones cliente\n\u251c\u2500\u2500 database.lua            # sistema de base de datos\n\u251c\u2500\u2500 anticheat_install.sql   # script de instalaci\u00f3n bd\n\u251c\u2500\u2500 ui/\n\u2502   \u2514\u2500\u2500 index.html          # panel de administraci\u00f3n\n\u2514\u2500\u2500 readme.md              # esta gu\u00eda\n\n\n\ud83d\ude80 instalaci\u00f3n\n\npaso 1: preparar la base de datos\n\nimportante: configura primero la base de datos antes de instalar el resource.\n\nopci\u00f3n a: mysql/mariadb (recomendado)\n\n\nejecuta el archivo anticheat_install.sql en tu base de datos:\nsql\nmysql -u tu_usuario -p tu_base_de_datos &lt; anticheat_install.sql\n\ninstala uno de estos resources de mysql:\n\n\nmysql-async (m\u00e1s com\u00fan)\noxmysql (m\u00e1s moderno)  \nghmattimysql (legacy)\n\n\n\n```bash\n\nen tu server.cfg\n\nensure mysql-async  # o el que prefieras\n```\n\nopci\u00f3n b: sin base de datos\n\nsi no quieres usar base de datos, configura en config.lua:\nlua\nconfig.general.usedatabase = false\n\n\npaso 2: instalar el resource\n\n\ndescarga todos los archivos del sistema\ncrea carpeta advanced-anticheat en resources/[anticheat]/\ncopia todos los archivos a la carpeta\n\n\npaso 3: configurar el sistema\n\nedita config.lua:\n```lua\n-- habilitar base de datos\nconfig.general.usedatabase = true\nconfig.general.databasetype = \"mysql\"  -- mysql o sqlite\n\n-- configurar tu servidor\nconfig.general.servername = \"mi servidor rp\"\n\n-- configurar capturas\nconfig.screenshot.enabled = true\nconfig.screenshot.webhookurl = \"tuwebhookdiscord\"  -- opcional\n\n-- configurar detecciones\nconfig.safeevents.enabled = true\nconfig.propsdetection.enabled = true\n```\n\npaso 4: permisos y server.cfg\n\na\u00f1ade a tu server.cfg:\n```cfg\n\ndependencias\n\nensure mysql-async          # o tu system de mysql\nensure screenshot-basic     # para capturas\nensure advanced-anticheat\n\npermisos b\u00e1sicos\n\naddace group.admin anticheat.admin allow\naddace group.admin anticheat.notify allow\nadd_ace group.mod anticheat.view allow\n\nexenciones para staff (opcional)\n\nadd_ace identifier.steam:110000100000000 anticheat.exempt allow\n```\n\npaso 5: primera ejecuci\u00f3n\n\n\nreinicia el servidor\nusa /anticheat:status para verificar funcionamiento\nusa /ac para abrir el panel de admin\nconfigura seg\u00fan tus necesidades\n\n\n\ud83d\uddc4\ufe0f sistema de base de datos\n\ntablas principales\n\n| tabla | descripci\u00f3n |\n|-------|-------------|\n| anticheat_violations | todas las violaciones detectadas |\n| anticheat_bans | bans temporales y permanentes |\n| anticheat_players | informaci\u00f3n de jugadores |\n| anticheat_stats | estad\u00edsticas diarias |\n| anticheat_logs | logs del sistema |\n| anticheat_screenshots | metadata de capturas |\n| anticheat_config | configuraciones din\u00e1micas |\n\nfuncionalidades de bd\n\n\nbans autom\u00e1ticos: sistema progresivo de sanciones\nwhitelist persistente: exenciones permanentes con razones  \ntrust score: puntuaci\u00f3n autom\u00e1tica de confianza (0-100)\nestad\u00edsticas: reportes detallados de violaciones\ncleanup autom\u00e1tico: limpieza de datos antiguos\nbackups: vistas y procedimientos para reportes\n\n\n\u2699\ufe0f configuraci\u00f3n avanzada\n\nconfiguraci\u00f3n de base de datos\n\nlua\nconfig.general = {\n    usedatabase = true,\n    databasetype = \"mysql\",  -- mysql o sqlite\n    maxviolations = 5,       -- violaciones antes de ban autom\u00e1tico\n    statssaveinterval = 300000  -- guardar stats cada 5 min\n}\n\n\nsistema de sanciones progresivas\n\nlua\nconfig.sanctions.progressive = {\n    enabled = true,\n    rules = {\n        critical = {  -- onscreen_menu, aimbot, etc.\n            actions = {\"screenshot\", \"temp_ban\", \"ban\"}\n        },\n        severe = {    -- blacklisted_prop, infinite_ammo, etc.\n            actions = {\"warning\", \"kick\", \"temp_ban\", \"ban\"}\n        },\n        minor = {     -- speed_anomaly, too_many_props, etc.\n            actions = {\"warning\", \"warning\", \"kick\", \"temp_ban\"}\n        }\n    }\n}\n\n\nconfiguraci\u00f3n de screenshots con bd\n\nlua\nconfig.screenshot = {\n    storepath = \"screenshots/\",\n    webhookurl = \"https://discord.com/api/webhooks/...\",\n    aianalysis = true,\n    autoscreenshotonviolation = true  -- screenshot autom\u00e1tico en violaciones\n}\n\n\n\ud83c\udfae comandos con base de datos\n\nadministradores\n\n\n/ac                              - panel de administraci\u00f3n web\n/anticheat:status               - estad\u00edsticas del sistema (incluye bd)\n/anticheat:whitelist &lt;id&gt; [raz\u00f3n] - a\u00f1adir a whitelist permanente\n/anticheat:unban &lt;steam_id&gt;      - desbanear jugador\n/anticheat:playerinfo &lt;id&gt;       - ver historial completo del jugador\n\n\nmoderadores\n\n\n/anticheat:playerinfo &lt;id&gt;  - ver info b\u00e1sica del jugador\n\n\n\ud83d\udcca panel de administraci\u00f3n mejorado\n\nel panel web ahora incluye:\n- estad\u00edsticas en tiempo real desde la base de datos\n- historial de violaciones con filtros\n- lista de bans activos con fechas de expiraci\u00f3n\n- trust score de jugadores\n- gr\u00e1ficos de tendencias de violaciones\n- gesti\u00f3n de whitelist con razones\n- logs del sistema en tiempo real\n\nacceder al panel\n\n\nusa /ac en el juego (requiere permiso anticheat.admin)\nnavega por las pesta\u00f1as: violaciones, monitor, configuraci\u00f3n\nselecciona jugadores para aplicar acciones\nrevisa estad\u00edsticas y logs\n\n\n\ud83d\udd27 integraci\u00f3n con frameworks\n\nesx con base de datos\n\nlua\nconfig.integrations.esx = {\n    enabled = true,\n    moneyevents = true,  -- monitorear eventos de dinero\n    itemevents = true,   -- monitorear items\n    jobevents = true     -- monitorear trabajos\n}\n\n\nqbcore con base de datos\n\nlua\nconfig.integrations.qbcore = {\n    enabled = true,\n    moneyevents = true,\n    itemevents = true,\n    jobevents = true\n}\n\n\n\ud83d\udcc8 consultas \u00fatiles\n\nver top violadores de la semana\n\nsql\nselect player_name, count(*) as violations \nfrom anticheat_violations \nwhere timestamp &gt;= date_sub(now(), interval 7 day)\ngroup by player_identifier, player_name \norder by violations desc limit 10;\n\n\nver jugadores con bajo trust score\n\nsql\nselect player_name, total_violations, trust_score, last_violation\nfrom anticheat_players \nwhere trust_score &lt; 20 and total_violations &gt; 0 and not is_whitelisted\norder by trust_score asc;\n\n\nestad\u00edsticas de efectividad\n\nsql\nselect \n    violation_type,\n    count(*) as total,\n    count(case when action_taken = 'ban' then 1 end) as bans\nfrom anticheat_violations \nwhere timestamp &gt;= date_sub(now(), interval 30 day)\ngroup by violation_type;\n\n\n\ud83d\udd04 mantenimiento autom\u00e1tico\n\nla base de datos incluye:\n- cleanup autom\u00e1tico de datos antiguos (90 d\u00edas violaciones, 30 d\u00edas logs)\n- estad\u00edsticas diarias generadas autom\u00e1ticamente\n- desactivaci\u00f3n de bans temporales expirados\n- actualizaci\u00f3n autom\u00e1tica de trust scores\n\n\ud83d\udea8 migraci\u00f3n desde versi\u00f3n sin bd\n\nsi ten\u00edas el anticheat sin base de datos:\n\n\nbackup: respalda tu configuraci\u00f3n actual\ninstalar bd: ejecuta el script sql\nconfigurar: cambia usedatabase = true \nreiniciar: reinicia el resource\nverificar: los datos nuevos se guardar\u00e1n en bd\n\n\n\ud83d\udee0\ufe0f soluci\u00f3n de problemas\n\nerror: \"base de datos no disponible\"\n\nsoluci\u00f3n: verifica que mysql-async/oxmysql est\u00e9 funcionando y las tablas creadas.\n\nerror: \"tabla no existe\"\n\nsoluci\u00f3n: ejecuta el script anticheat_install.sql completo.\n\npanel web no funciona con bd\n\nsoluci\u00f3n: verifica permisos anticheat.admin y conexi\u00f3n a bd.\n\nrendimiento con bd\n\nsoluci\u00f3n: ajusta config.performance.intervals para reducir consultas.\n\n\ud83d\udcca monitoreo de rendimiento\n\ncon base de datos habilitada, monitorea:\n- consultas/segundo: no deber\u00eda exceder 10-20\n- latencia bd: mantener bajo 50ms\n- tama\u00f1o tablas: limpieza autom\u00e1tica cada 24h\n- memoria: ~50-100mb adicionales con bd\n\n\ud83d\udd10 seguridad de la base de datos\n\n\nacceso restrictivo: solo el resource debe acceder a las tablas\nvalidaci\u00f3n: todos los inputs son sanitizados  \nlogs auditables: todas las acciones se registran\nbackup regular: respalda las tablas del anticheat\ncleanup: datos antiguos se eliminan autom\u00e1ticamente\n\n\n\n\n\ud83d\ude80 instalaci\u00f3n r\u00e1pida con base de datos\n\n```bash\n\n1. crear base de datos\n\nmysql -u root -p -e \"create database anticheat_db;\"\n\n2. instalar tablas\n\nmysql -u root -p anticheatdb &lt; anticheatinstall.sql\n\n3. configurar server.cfg\n\necho \"ensure mysql-async\" &gt;&gt; server.cfg\necho \"ensure advanced-anticheat\" &gt;&gt; server.cfg\n\n4. configurar permisos\n\necho \"add_ace group.admin anticheat.admin allow\" &gt;&gt; server.cfg\n\n5. reiniciar servidor y usar /ac\n\n```\n\n\u00a1tu servidor ahora tiene el sistema anticheat m\u00e1s avanzado con base de datos completa! \ud83d\udee1\ufe0f\u2728\n\n\u2699\ufe0f configuraci\u00f3n avanzada\n\nsistema de capturas de pantalla\n\nlua\nconfig.screenshot = {\n    enabled = true,\n    interval = 30000,        -- 30 segundos entre capturas\n    quality = 0.8,           -- calidad de imagen (0.1-1.0)\n    aianalysis = true,       -- an\u00e1lisis autom\u00e1tico\n    webhookurl = \"tu_webhook\" -- discord webhook (opcional)\n}\n\n\neventos seguros\n\nlua\nconfig.safeevents = {\n    blacklistedevents = {\n        \"esx:addmoney\",\n        \"banking:addmoney\",\n        \"spawn_money\"\n        -- a\u00f1adir m\u00e1s eventos seg\u00fan tu servidor\n    },\n    suspiciousamounts = {\n        money = 1000000,  -- cantidades sospechosas\n        items = 100\n    }\n}\n\n\ndetecci\u00f3n de props\n\nlua\nconfig.propsdetection = {\n    maxpropsperplayer = 50,\n    blacklistedprops = {\n        \"prop_money_bag_01\",\n        \"prop_cash_pile_01\"\n        -- a\u00f1adir props prohibidos\n    }\n}\n\n\n\ud83c\udfae uso del sistema\n\ncomandos de administrador\n\n\n/ac                    - abrir panel de administraci\u00f3n\n/anticheat:status      - ver estad\u00edsticas del sistema\n/anticheat:whitelist   - a\u00f1adir jugador a whitelist\n\n\npanel de administraci\u00f3n\n\n\nf5: actualizar datos\nesc: cerrar panel\nclic en jugador para seleccionar y aplicar acciones\n\n\nacciones disponibles\n\n\n\ud83d\udcf7 screenshot: tomar captura manual\n\u26a0\ufe0f kick: expulsar jugador\n\ud83d\udd28 ban: banear permanente\n\u2705 whitelist: exentar de detecciones\n\n\n\ud83d\udd27 integraci\u00f3n con frameworks\n\nesx\n\nel sistema detecta autom\u00e1ticamente esx y monitorea:\n- eventos de dinero (esx:addmoney, etc.)\n- items del inventario\n- trabajos y rangos\n\nqbcore\n\ncompatible con qbcore para:\n- sistema de dinero\n- items y inventario\n- trabajos y permisos\n\nstandalone\n\nfunciona sin framework, con detecciones b\u00e1sicas.\n\n\ud83d\udcca sistema de sanciones\n\nsanciones progresivas\n\n\nprimera violaci\u00f3n: advertencia\nsegunda violaci\u00f3n: kick\ntercera violaci\u00f3n: ban temporal\ncuarta violaci\u00f3n: ban permanente\n\n\ntipos de violaciones\n\n\ncr\u00edticas: onscreenmenu, aimbot, godmode\ngraves: blacklistedprop, infiniteammo\nleves: speedanomaly, toomany_props\n\n\n\ud83d\udd0d logs y monitoreo\n\narchivo de logs\n\n\nlogs/anticheat/\n\u251c\u2500\u2500 violations_2024-01-01.log\n\u251c\u2500\u2500 actions_2024-01-01.log\n\u2514\u2500\u2500 system_2024-01-01.log\n\n\ndiscord webhooks\n\nconfigura webhooks para recibir alertas:\nlua\nconfig.logging.discord = {\n    enabled = true,\n    webhookurl = \"tu_webhook_discord\",\n    sendviolations = true\n}\n\n\n\ud83d\udea8 tipos de detecci\u00f3n\n\n1. men\u00fas en pantalla\n\n\npatrones de texto sospechosos\nan\u00e1lisis de capturas autom\u00e1tico\ndetecci\u00f3n de overlays de men\u00fas\n\n\n2. eventos maliciosos\n\n\ninterceptaci\u00f3n de eventos del servidor\nverificaci\u00f3n de par\u00e1metros\nbloqueo de exploits conocidos\n\n\n3. props an\u00f3malos\n\n\nl\u00edmites de spawning\nmodelos prohibidos\ndetecci\u00f3n de spam\n\n\n4. modificaciones del jugador\n\n\ngod mode\narmadura infinita\nvelocidad an\u00f3mala\nmunici\u00f3n infinita\nteletransporte\n\n\n\ud83d\udee0\ufe0f soluci\u00f3n de problemas\n\nproblema: screenshots no funcionan\n\nsoluci\u00f3n: verificar que screenshot-basic est\u00e9 instalado y funcionando.\n\nproblema: ui no se abre\n\nsoluci\u00f3n: verificar permisos ace y que el jugador tenga anticheat.admin.\n\nproblema: muchos falsos positivos\n\nsoluci\u00f3n: ajustar configuraci\u00f3n en config.lua y a\u00f1adir exenciones.\n\nproblema: alto uso de cpu\n\nsoluci\u00f3n: aumentar intervalos de detecci\u00f3n en configuraci\u00f3n de rendimiento.\n\n\ud83d\udcc8 optimizaci\u00f3n de rendimiento\n\nconfiguraci\u00f3n recomendada\n\nlua\nconfig.performance = {\n    maxcpuusage = 2.0,     -- ms por frame\n    dynamiclimits = true,   -- ajustar seg\u00fan jugadores\n    intervals = {\n        playerscan = 2000,   -- menos frecuente con muchos jugadores\n        entityscan = 3000\n    }\n}\n\n\nservidores con 64+ jugadores\n\n\naumentar intervalos de escaneo\nactivar l\u00edmites din\u00e1micos\nconsiderar deshabilitar algunas detecciones menos cr\u00edticas\n\n\n\ud83d\udd04 actualizaciones\n\nversi\u00f3n 1.0.0\n\n\nsistema base con todas las caracter\u00edsticas\nui de administraci\u00f3n completa\ndetecci\u00f3n de men\u00fas, eventos y props\nsistema de sanciones progresivas\n\n\nfuturas versiones\n\n\nmachine learning para detecci\u00f3n avanzada\nintegraci\u00f3n con m\u00e1s sistemas de bans\napi para otros recursos\nan\u00e1lisis de comportamiento\n\n\n\ud83e\udd1d soporte\n\npara soporte t\u00e9cnico:\n1. verifica la configuraci\u00f3n\n2. revisa los logs de errores\n3. comprueba las dependencias\n4. consulta la documentaci\u00f3n\n\n\ud83d\udcc4 licencia\n\nsistema desarrollado para servidores fivem.\npersonalizaci\u00f3n y modificaci\u00f3n permitidas.\n\n\n\n\ud83d\ude80 instalaci\u00f3n r\u00e1pida\n\n```bash\n\n1. descargar archivos en resources/advanced-anticheat/\n\n2. a\u00f1adir a server.cfg:\n\nensure screenshot-basic\nensure advanced-anticheat\n\n3. reiniciar servidor\n\n4. usar /ac para abrir panel de admin\n\n```\n\n\u00a1tu servidor ahora est\u00e1 protegido por el advanced anticheat system! \ud83d\udee1\ufe0f\n"};
-READMES["readme2_md"] = {"filename": "readme2.md", "html": "<h1>\ud83d\ude9b\ud83d\udcb0 Money Truck Heist System</h1>\n\n<div align=\"center\">\n\n![Version](https://img.shields.io/badge/version-1.0.0-brightgreen)\n![ESX](https://img.shields.io/badge/ESX-Ready-blue)\n![FiveM](https://img.shields.io/badge/FiveM-Compatible-orange)\n![License](https://img.shields.io/badge/license-MIT-green)\n\n**Un sistema completo de atracos a camiones de dinero para servidores FiveM ESX**\n\n*Vive la adrenalina de los grandes golpes cinematogr\u00e1ficos* \ud83c\udfac\n\n</div>\n\n<hr />\n\n<h2>\ud83c\udfaf <strong>Caracter\u00edsticas Principales</strong></h2>\n\n<h3>\ud83d\udea8 <strong>Sistema Din\u00e1mico de Spawneo</strong></h3>\n\n<ul>\n<li>\u23f0 <strong>Spawns autom\u00e1ticos</strong> cada 30 minutos (totalmente configurable)</li>\n<li>\ud83d\uddfa\ufe0f <strong>M\u00faltiples puntos de origen</strong> distribuidos por el mapa</li>\n<li>\ud83c\udfb2 <strong>Rutas aleatorias</strong> hacia diferentes bancos de la ciudad</li>\n<li>\ud83d\udccd <strong>Blips en tiempo real</strong> para seguimiento</li>\n</ul>\n\n<h3>\ud83d\udc6e\u200d\u2642\ufe0f <strong>NPCs de Seguridad Inteligentes</strong></h3>\n\n<ul>\n<li>\ud83d\udee1\ufe0f <strong>Dos guardias armados</strong> con equipamiento completo</li>\n<li>\ud83d\udd2b <strong>Carabinas de asalto</strong> con precisi\u00f3n configurable</li>\n<li>\ud83e\udde0 <strong>IA avanzada</strong> que reacciona a las amenazas</li>\n<li>\u2694\ufe0f <strong>Sistema de combate realista</strong> con paradas de emergencia</li>\n</ul>\n\n<h3>\ud83d\udc8e <strong>Sistema de Robo Interactivo</strong></h3>\n\n<ul>\n<li>\ud83c\udfaf <strong>Integraci\u00f3n completa con ox_target</strong></li>\n<li>\ud83d\udddd\ufe0f <strong>Obtenci\u00f3n de llaves</strong> de guardias eliminados</li>\n<li>\ud83d\udd13 <strong>Apertura de maletero</strong> con animaciones</li>\n<li>\ud83d\udcb8 <strong>Recompensas configurables</strong> (dinero negro/legal)</li>\n</ul>\n\n<h3>\ud83d\udce2 <strong>Integraci\u00f3n con Sistemas Policiales</strong></h3>\n\n<ul>\n<li>\ud83d\ude94 <strong>Alertas autom\u00e1ticas</strong> via origen-police</li>\n<li>\ud83d\udcfb <strong>Mensajes de entorno</strong> realistas</li>\n<li>\ud83d\udea8 <strong>Notificaciones inmediatas</strong> a las fuerzas del orden</li>\n</ul>\n\n<hr />\n\n<h2>\ud83d\udccb <strong>Requisitos</strong></h2>\n\n<p>| Dependencia | Versi\u00f3n | Estado |\n|-------------|---------|--------|\n| <strong>ESX Legacy</strong> | Latest | \u2705 Requerido |\n| <strong>ox_target</strong> | Latest | \u2705 Requerido |\n| <strong>origen-police</strong> | Latest | \u2705 Requerido |</p>\n\n<hr />\n\n<h2>\ud83d\ude80 <strong>Instalaci\u00f3n R\u00e1pida</strong></h2>\n\n<h3>1\ufe0f\u20e3 <strong>Descarga e Instalaci\u00f3n</strong></h3>\n\n<p>```bash</p>\n\n<h1>Descargar en tu carpeta de resources</h1>\n\n<p>cd resources/\ngit clone [tu-repo] money-truck\n```</p>\n\n<h3>2\ufe0f\u20e3 <strong>Configuraci\u00f3n del Servidor</strong></h3>\n\n<p>A\u00f1ade a tu <code>server.cfg</code>:\n<code>cfg\nensure money-truck\n</code></p>\n\n<h3>3\ufe0f\u20e3 <strong>\u00a1Listo para usar!</strong></h3>\n\n<p>El script se inicializar\u00e1 autom\u00e1ticamente y comenzar\u00e1 a generar camiones.</p>\n\n<hr />\n\n<h2>\u2699\ufe0f <strong>Configuraci\u00f3n Avanzada</strong></h2>\n\n<h3>\ud83d\udd27 <strong>Par\u00e1metros Principales</strong> (<code>config.lua</code>)</h3>\n\n<p>```lua\n-- \u23f1\ufe0f Tiempo entre spawns\nConfig.SpawnInterval = 30 * 60 * 1000  -- 30 minutos</p>\n\n<p>-- \ud83d\ude9b Veh\u00edculo y NPCs\nConfig.TruckModel = \"stockade\"           -- Modelo del cami\u00f3n\nConfig.PedModel = \"s<em>m</em>m<em>security</em>01\"    -- Modelo de guardias</p>\n\n<p>-- \ud83d\udcb0 Sistema de Recompensas\nConfig.RewardType = \"black_money\"        -- Tipo de dinero\nConfig.RewardAmount = 125000             -- Cantidad base</p>\n\n<p>-- \ud83c\udfaf Configuraci\u00f3n de Combate\nConfig.NPCAccuracy = 40                  -- Precisi\u00f3n (0-100)\nConfig.NPCWeapon = \"WEAPON_CARBINERIFLE\" -- Arma de los NPCs\n```</p>\n\n<h3>\ud83d\udccd <strong>Personalizar Ubicaciones</strong></h3>\n\n<p>Modifica los arrays en <code>config.lua</code> para ajustar:\n- <strong>Puntos de spawn</strong> de camiones\n- <strong>Destinos bancarios</strong>\n- <strong>Waypoints</strong> para rutas m\u00e1s realistas</p>\n\n<hr />\n\n<h2>\ud83c\udfae <strong>C\u00f3mo Funciona</strong></h2>\n\n<h3>\ud83d\udd04 <strong>Ciclo de Vida del Atraco</strong></h3>\n\n<ol>\n<li><p><strong>\ud83d\ude9b Spawn Autom\u00e1tico</strong></p>\n\n<ul>\n<li>El cami\u00f3n aparece en un punto aleatorio</li>\n<li>Dos guardias inician ruta hacia un banco</li>\n</ul></li>\n<li><p><strong>\u26a0\ufe0f Inicio del Atraco</strong></p>\n\n<ul>\n<li>Al disparar al veh\u00edculo se activa el protocolo de emergencia</li>\n<li>Los guardias frenan y salen a combatir</li>\n<li>Se env\u00eda alerta autom\u00e1tica a la polic\u00eda</li>\n</ul></li>\n<li><p><strong>\u2694\ufe0f Combate</strong></p>\n\n<ul>\n<li>Los NPCs luchan con IA avanzada</li>\n<li>Buscan cobertura y combaten estrat\u00e9gicamente</li>\n<li>Resistencia proporcional a la configuraci\u00f3n</li>\n</ul></li>\n<li><p><strong>\ud83d\udddd\ufe0f Obtenci\u00f3n de Acceso</strong></p>\n\n<ul>\n<li>Eliminar ambos guardias</li>\n<li>Usar ox_target para coger las llaves de cualquier guardia</li>\n<li>Las llaves permiten acceso al maletero</li>\n</ul></li>\n<li><p><strong>\ud83d\udcb0 Recompensa</strong></p>\n\n<ul>\n<li>Usar ox_target en el maletero del cami\u00f3n</li>\n<li>Animaci\u00f3n de apertura forzada</li>\n<li>Obtenci\u00f3n de la recompensa configurada</li>\n</ul></li>\n</ol>\n\n<hr />\n\n<h2>\ud83c\udfaf <strong>Comandos de Administrador</strong></h2>\n\n<h3><code>/spawntruck [punto]</code></h3>\n\n<ul>\n<li><strong>Descripci\u00f3n</strong>: Fuerza el spawn inmediato de un cami\u00f3n</li>\n<li><strong>Par\u00e1metros</strong>: <code>[punto]</code> - N\u00famero del punto de spawn (1-4)</li>\n<li><strong>Ejemplo</strong>: <code>/spawntruck 2</code></li>\n<li><strong>Permisos</strong>: Solo administradores</li>\n</ul>\n\n<hr />\n\n<h2>\ud83d\udee0\ufe0f <strong>Personalizaci\u00f3n Avanzada</strong></h2>\n\n<h3>\ud83c\udfa8 <strong>Modelos Personalizados</strong></h3>\n\n<p>```lua\n-- Cambiar modelo del cami\u00f3n blindado\nConfig.TruckModel = \"stockade2\"  -- O cualquier otro modelo</p>\n\n<p>-- Personalizar guardias de seguridad<br />\nConfig.PedModel = \"s<em>m</em>y<em>armymech</em>01\"  -- Mec\u00e1nico del ej\u00e9rcito\nConfig.PedModel = \"s<em>m</em>m<em>highsec</em>01\"   -- Seguridad de alto nivel\n```</p>\n\n<h3>\ud83d\udcb8 <strong>Sistemas de Recompensa</strong></h3>\n\n<p>```lua\n-- Dinero legal\nConfig.RewardType = \"money\"\nConfig.RewardAmount = 75000</p>\n\n<p>-- Items personalizados\nConfig.RewardType = \"gold_bar\"\nConfig.RewardAmount = 10\n```</p>\n\n<h3>\u2694\ufe0f <strong>Configuraci\u00f3n de Combate</strong></h3>\n\n<p>```lua\n-- NPCs m\u00e1s letales\nConfig.NPCAccuracy = 80\nConfig.NPCWeapon = \"WEAPON_SPECIALCARBINE\"</p>\n\n<p>-- NPCs m\u00e1s f\u00e1ciles\nConfig.NPCAccuracy = 20\nConfig.NPCWeapon = \"WEAPON_PISTOL\"\n```</p>\n\n<hr />\n\n<h2>\ud83d\udcca <strong>Estad\u00edsticas y Monitoreo</strong></h2>\n\n<p>El script incluye logging autom\u00e1tico para:\n- \u2705 Spawns exitosos de camiones\n- \ud83d\udea8 Inicio de atracos\n- \ud83d\udcb0 Recompensas otorgadas\n- \ud83d\udc6e\u200d\u2642\ufe0f Alertas policiales enviadas</p>\n\n<hr />\n\n<h2>\ud83d\udc1b <strong>Soluci\u00f3n de Problemas</strong></h2>\n\n<h3>\u2753 <strong>Problemas Comunes</strong></h3>\n\n<p><strong>Los camiones no aparecen</strong>\n- \u2705 Verifica que ox_target est\u00e9 instalado\n- \u2705 Revisa la consola por errores de modelos\n- \u2705 Confirma que ESX est\u00e9 funcionando correctamente</p>\n\n<p><strong>Los NPCs no combaten</strong>\n- \u2705 Verifica que los modelos de armas sean v\u00e1lidos\n- \u2705 Revisa la configuraci\u00f3n de precisi\u00f3n\n- \u2705 Confirma que los modelos de NPCs se carguen correctamente</p>\n\n<p><strong>Las recompensas no se otorgan</strong>\n- \u2705 Verifica la configuraci\u00f3n del tipo de item\n- \u2705 Confirma que el item existe en tu base de datos ESX\n- \u2705 Revisa los logs del servidor por errores</p>\n\n<h3>\ud83d\udd0d <strong>Debug</strong></h3>\n\n<p>Habilita logging detallado modificando:\n<code>lua\nConfig.Debug = true  -- En config.lua\n</code></p>\n\n<hr />\n\n<h2>\ud83e\udd1d <strong>Contribuir</strong></h2>\n\n<p>\u00a1Las contribuciones son bienvenidas! Si tienes ideas para mejorar el script:</p>\n\n<ol>\n<li>\ud83c\udf74 Fork el repositorio</li>\n<li>\ud83c\udf3f Crea una branch para tu feature</li>\n<li>\ud83d\udcbb Realiza tus cambios</li>\n<li>\ud83d\udce4 Env\u00eda un pull request</li>\n</ol>\n\n<hr />\n\n<h2>\ud83d\udcdd <strong>Changelog</strong></h2>\n\n<h3>Version 1.0.0 (Actual)</h3>\n\n<ul>\n<li>\u2728 <strong>Nuevo</strong>: Sistema completo de camiones de dinero</li>\n<li>\u2728 <strong>Nuevo</strong>: Integraci\u00f3n con ox_target</li>\n<li>\u2728 <strong>Nuevo</strong>: Sistema de alertas policiales</li>\n<li>\u2728 <strong>Nuevo</strong>: NPCs con IA de combate</li>\n<li>\u2728 <strong>Nuevo</strong>: Sistema de recompensas configurable</li>\n</ul>\n\n<hr />\n\n<h2>\ud83d\udcdc <strong>Licencia</strong></h2>\n\n<p>Este proyecto est\u00e1 bajo la Licencia MIT - ve el archivo <code>LICENSE</code> para m\u00e1s detalles.</p>\n\n<hr />\n\n<div align=\"center\">\n\n### \ud83c\udf1f **\u00bfTe gusta el script? \u00a1Dale una estrella!**\n\n**Desarrollado con \u2764\ufe0f para la comunidad FiveM**\n\n![GitHub stars](https://img.shields.io/github/stars/tuusuario/money-truck?style=social)\n![GitHub forks](https://img.shields.io/github/forks/tuusuario/money-truck?style=social)\n\n</div>\n\n<hr />\n\n<h2>\ud83d\udcde <strong>Soporte</strong></h2>\n\n<p>\u00bfNecesitas ayuda? \u00a1Cont\u00e1ctanos!</p>\n\n<ul>\n<li>\ud83d\udce7 <strong>Email</strong>: soporte@tudominio.com  </li>\n<li>\ud83d\udcac <strong>Discord</strong>: <a href=\"https://discord.gg/tuservidor\">Tu servidor de Discord</a></li>\n<li>\ud83d\udc1b <strong>Issues</strong>: <a href=\"https://github.com/tuusuario/money-truck/issues\">GitHub Issues</a></li>\n</ul>\n\n<hr />\n\n<p><em>\u00a1Gracias por usar Money Truck Heist System! \ud83d\ude9b\ud83d\udcb0</em></p>\n", "text": "\ud83d\ude9b\ud83d\udcb0 money truck heist system\n\n\n\n![version](https://img.shields.io/badge/version-1.0.0-brightgreen)\n![esx](https://img.shields.io/badge/esx-ready-blue)\n![fivem](https://img.shields.io/badge/fivem-compatible-orange)\n![license](https://img.shields.io/badge/license-mit-green)\n\n**un sistema completo de atracos a camiones de dinero para servidores fivem esx**\n\n*vive la adrenalina de los grandes golpes cinematogr\u00e1ficos* \ud83c\udfac\n\n\n\n\n\n\ud83c\udfaf caracter\u00edsticas principales\n\n\ud83d\udea8 sistema din\u00e1mico de spawneo\n\n\n\u23f0 spawns autom\u00e1ticos cada 30 minutos (totalmente configurable)\n\ud83d\uddfa\ufe0f m\u00faltiples puntos de origen distribuidos por el mapa\n\ud83c\udfb2 rutas aleatorias hacia diferentes bancos de la ciudad\n\ud83d\udccd blips en tiempo real para seguimiento\n\n\n\ud83d\udc6e\u200d\u2642\ufe0f npcs de seguridad inteligentes\n\n\n\ud83d\udee1\ufe0f dos guardias armados con equipamiento completo\n\ud83d\udd2b carabinas de asalto con precisi\u00f3n configurable\n\ud83e\udde0 ia avanzada que reacciona a las amenazas\n\u2694\ufe0f sistema de combate realista con paradas de emergencia\n\n\n\ud83d\udc8e sistema de robo interactivo\n\n\n\ud83c\udfaf integraci\u00f3n completa con ox_target\n\ud83d\udddd\ufe0f obtenci\u00f3n de llaves de guardias eliminados\n\ud83d\udd13 apertura de maletero con animaciones\n\ud83d\udcb8 recompensas configurables (dinero negro/legal)\n\n\n\ud83d\udce2 integraci\u00f3n con sistemas policiales\n\n\n\ud83d\ude94 alertas autom\u00e1ticas via origen-police\n\ud83d\udcfb mensajes de entorno realistas\n\ud83d\udea8 notificaciones inmediatas a las fuerzas del orden\n\n\n\n\n\ud83d\udccb requisitos\n\n| dependencia | versi\u00f3n | estado |\n|-------------|---------|--------|\n| esx legacy | latest | \u2705 requerido |\n| ox_target | latest | \u2705 requerido |\n| origen-police | latest | \u2705 requerido |\n\n\n\n\ud83d\ude80 instalaci\u00f3n r\u00e1pida\n\n1\ufe0f\u20e3 descarga e instalaci\u00f3n\n\n```bash\n\ndescargar en tu carpeta de resources\n\ncd resources/\ngit clone [tu-repo] money-truck\n```\n\n2\ufe0f\u20e3 configuraci\u00f3n del servidor\n\na\u00f1ade a tu server.cfg:\ncfg\nensure money-truck\n\n\n3\ufe0f\u20e3 \u00a1listo para usar!\n\nel script se inicializar\u00e1 autom\u00e1ticamente y comenzar\u00e1 a generar camiones.\n\n\n\n\u2699\ufe0f configuraci\u00f3n avanzada\n\n\ud83d\udd27 par\u00e1metros principales (config.lua)\n\n```lua\n-- \u23f1\ufe0f tiempo entre spawns\nconfig.spawninterval = 30 * 60 * 1000  -- 30 minutos\n\n-- \ud83d\ude9b veh\u00edculo y npcs\nconfig.truckmodel = \"stockade\"           -- modelo del cami\u00f3n\nconfig.pedmodel = \"smmsecurity01\"    -- modelo de guardias\n\n-- \ud83d\udcb0 sistema de recompensas\nconfig.rewardtype = \"black_money\"        -- tipo de dinero\nconfig.rewardamount = 125000             -- cantidad base\n\n-- \ud83c\udfaf configuraci\u00f3n de combate\nconfig.npcaccuracy = 40                  -- precisi\u00f3n (0-100)\nconfig.npcweapon = \"weapon_carbinerifle\" -- arma de los npcs\n```\n\n\ud83d\udccd personalizar ubicaciones\n\nmodifica los arrays en config.lua para ajustar:\n- puntos de spawn de camiones\n- destinos bancarios\n- waypoints para rutas m\u00e1s realistas\n\n\n\n\ud83c\udfae c\u00f3mo funciona\n\n\ud83d\udd04 ciclo de vida del atraco\n\n\n\ud83d\ude9b spawn autom\u00e1tico\n\n\nel cami\u00f3n aparece en un punto aleatorio\ndos guardias inician ruta hacia un banco\n\n\u26a0\ufe0f inicio del atraco\n\n\nal disparar al veh\u00edculo se activa el protocolo de emergencia\nlos guardias frenan y salen a combatir\nse env\u00eda alerta autom\u00e1tica a la polic\u00eda\n\n\u2694\ufe0f combate\n\n\nlos npcs luchan con ia avanzada\nbuscan cobertura y combaten estrat\u00e9gicamente\nresistencia proporcional a la configuraci\u00f3n\n\n\ud83d\udddd\ufe0f obtenci\u00f3n de acceso\n\n\neliminar ambos guardias\nusar ox_target para coger las llaves de cualquier guardia\nlas llaves permiten acceso al maletero\n\n\ud83d\udcb0 recompensa\n\n\nusar ox_target en el maletero del cami\u00f3n\nanimaci\u00f3n de apertura forzada\nobtenci\u00f3n de la recompensa configurada\n\n\n\n\n\n\ud83c\udfaf comandos de administrador\n\n/spawntruck [punto]\n\n\ndescripci\u00f3n: fuerza el spawn inmediato de un cami\u00f3n\npar\u00e1metros: [punto] - n\u00famero del punto de spawn (1-4)\nejemplo: /spawntruck 2\npermisos: solo administradores\n\n\n\n\n\ud83d\udee0\ufe0f personalizaci\u00f3n avanzada\n\n\ud83c\udfa8 modelos personalizados\n\n```lua\n-- cambiar modelo del cami\u00f3n blindado\nconfig.truckmodel = \"stockade2\"  -- o cualquier otro modelo\n\n-- personalizar guardias de seguridad\nconfig.pedmodel = \"smyarmymech01\"  -- mec\u00e1nico del ej\u00e9rcito\nconfig.pedmodel = \"smmhighsec01\"   -- seguridad de alto nivel\n```\n\n\ud83d\udcb8 sistemas de recompensa\n\n```lua\n-- dinero legal\nconfig.rewardtype = \"money\"\nconfig.rewardamount = 75000\n\n-- items personalizados\nconfig.rewardtype = \"gold_bar\"\nconfig.rewardamount = 10\n```\n\n\u2694\ufe0f configuraci\u00f3n de combate\n\n```lua\n-- npcs m\u00e1s letales\nconfig.npcaccuracy = 80\nconfig.npcweapon = \"weapon_specialcarbine\"\n\n-- npcs m\u00e1s f\u00e1ciles\nconfig.npcaccuracy = 20\nconfig.npcweapon = \"weapon_pistol\"\n```\n\n\n\n\ud83d\udcca estad\u00edsticas y monitoreo\n\nel script incluye logging autom\u00e1tico para:\n- \u2705 spawns exitosos de camiones\n- \ud83d\udea8 inicio de atracos\n- \ud83d\udcb0 recompensas otorgadas\n- \ud83d\udc6e\u200d\u2642\ufe0f alertas policiales enviadas\n\n\n\n\ud83d\udc1b soluci\u00f3n de problemas\n\n\u2753 problemas comunes\n\nlos camiones no aparecen\n- \u2705 verifica que ox_target est\u00e9 instalado\n- \u2705 revisa la consola por errores de modelos\n- \u2705 confirma que esx est\u00e9 funcionando correctamente\n\nlos npcs no combaten\n- \u2705 verifica que los modelos de armas sean v\u00e1lidos\n- \u2705 revisa la configuraci\u00f3n de precisi\u00f3n\n- \u2705 confirma que los modelos de npcs se carguen correctamente\n\nlas recompensas no se otorgan\n- \u2705 verifica la configuraci\u00f3n del tipo de item\n- \u2705 confirma que el item existe en tu base de datos esx\n- \u2705 revisa los logs del servidor por errores\n\n\ud83d\udd0d debug\n\nhabilita logging detallado modificando:\nlua\nconfig.debug = true  -- en config.lua\n\n\n\n\n\ud83e\udd1d contribuir\n\n\u00a1las contribuciones son bienvenidas! si tienes ideas para mejorar el script:\n\n\n\ud83c\udf74 fork el repositorio\n\ud83c\udf3f crea una branch para tu feature\n\ud83d\udcbb realiza tus cambios\n\ud83d\udce4 env\u00eda un pull request\n\n\n\n\n\ud83d\udcdd changelog\n\nversion 1.0.0 (actual)\n\n\n\u2728 nuevo: sistema completo de camiones de dinero\n\u2728 nuevo: integraci\u00f3n con ox_target\n\u2728 nuevo: sistema de alertas policiales\n\u2728 nuevo: npcs con ia de combate\n\u2728 nuevo: sistema de recompensas configurable\n\n\n\n\n\ud83d\udcdc licencia\n\neste proyecto est\u00e1 bajo la licencia mit - ve el archivo license para m\u00e1s detalles.\n\n\n\n\n\n### \ud83c\udf1f **\u00bfte gusta el script? \u00a1dale una estrella!**\n\n**desarrollado con \u2764\ufe0f para la comunidad fivem**\n\n![github stars](https://img.shields.io/github/stars/tuusuario/money-truck?style=social)\n![github forks](https://img.shields.io/github/forks/tuusuario/money-truck?style=social)\n\n\n\n\n\n\ud83d\udcde soporte\n\n\u00bfnecesitas ayuda? \u00a1cont\u00e1ctanos!\n\n\n\ud83d\udce7 email: soporte@tudominio.com  \n\ud83d\udcac discord: tu servidor de discord\n\ud83d\udc1b issues: github issues\n\n\n\n\n\u00a1gracias por usar money truck heist system! \ud83d\ude9b\ud83d\udcb0\n"};
-READMES["readme3_md"] = {"filename": "readme3.md", "html": "<h1>\ud83c\udf7a ps_bartender - Sistema Avanzado de Bartender para FiveM</h1>\n\n<p>Un sistema completo de bartender para FiveM con framework ESX que incluye sistema de jobs, rangos, experiencia, base de datos MySQL y configuraci\u00f3n in-character.</p>\n\n<p><img src=\"https://img.shields.io/badge/version-2.0.0-blue.svg\" alt=\"Version\" />\n<img src=\"https://img.shields.io/badge/framework-ESX-green.svg\" alt=\"Framework\" />\n<img src=\"https://img.shields.io/badge/license-MIT-yellow.svg\" alt=\"License\" /></p>\n\n<h2>\ud83d\udccb Caracter\u00edsticas Principales</h2>\n\n<h3>\ud83c\udfaf Sistema de Jobs y Rangos</h3>\n\n<ul>\n<li><strong>5 rangos profesionales</strong> con salarios diferenciados</li>\n<li><strong>Progresi\u00f3n autom\u00e1tica</strong> basada en experiencia</li>\n<li><strong>Restricciones por rango</strong> para items especiales</li>\n<li><strong>Creaci\u00f3n autom\u00e1tica de job</strong> o integraci\u00f3n con jobs existentes</li>\n</ul>\n\n<h3>\ud83c\udfd7\ufe0f Configuraci\u00f3n In-Character</h3>\n\n<ul>\n<li><strong>Men\u00fa intuitivo</strong> estilo jobcreator con <code>/bartender</code></li>\n<li><strong>Puntos configurables</strong>: bartender, tienda y m\u00faltiples puntos de barra</li>\n<li><strong>Sistema visual</strong> de configuraci\u00f3n con coordenadas precisas</li>\n<li><strong>Gesti\u00f3n completa</strong> de bares existentes</li>\n</ul>\n\n<h3>\ud83d\udcb0 Sistema Econ\u00f3mico Avanzado</h3>\n\n<ul>\n<li><strong>Salarios por rango</strong> (desde $200 hasta $1000)</li>\n<li><strong>Sistema de propinas</strong> completamente configurable</li>\n<li><strong>Bonus por tiempo trabajado</strong> y turnos completados</li>\n<li><strong>Distribuci\u00f3n inteligente</strong> de ganancias (70% bartender, 30% casa)</li>\n</ul>\n\n<h3>\ud83d\udcca Sistema de Experiencia</h3>\n\n<ul>\n<li><strong>XP por bebida servida</strong> y turnos completados</li>\n<li><strong>Subida autom\u00e1tica de rango</strong> al alcanzar requisitos</li>\n<li><strong>Estad\u00edsticas detalladas</strong> por jugador</li>\n<li><strong>Seguimiento completo</strong> de progreso</li>\n</ul>\n\n<h3>\ud83c\udfad Animaciones y Realismo</h3>\n\n<ul>\n<li><strong>M\u00faltiples animaciones</strong> de preparaci\u00f3n de bebidas</li>\n<li><strong>Animaciones aleatorias</strong> para variedad</li>\n<li><strong>Sistema de turnos</strong> con seguimiento de tiempo</li>\n<li><strong>Integraci\u00f3n completa</strong> con ox_target</li>\n</ul>\n\n<h3>\ud83d\uddc4\ufe0f Base de Datos MySQL</h3>\n\n<ul>\n<li><strong>Persistencia completa</strong> de configuraciones</li>\n<li><strong>Estad\u00edsticas avanzadas</strong> de jugadores</li>\n<li><strong>Sistema de backup</strong> autom\u00e1tico</li>\n<li><strong>Optimizaci\u00f3n</strong> para servidores grandes</li>\n</ul>\n\n<h2>\ud83d\udce6 Dependencias</h2>\n\n<ul>\n<li>\u2705 <strong>es_extended</strong> (Framework principal)</li>\n<li>\u2705 <strong>ox_target</strong> (Sistema de interacciones)</li>\n<li>\u2705 <strong>ox_lib</strong> (Librer\u00eda de interfaces)</li>\n<li>\u2705 <strong>oxmysql</strong> (Conector de base de datos)</li>\n</ul>\n\n<h2>\ud83d\ude80 Instalaci\u00f3n</h2>\n\n<h3>1. Base de Datos</h3>\n\n<p>```sql\n-- Ejecuta el archivo ps_bartender.sql en tu base de datos\n-- O ejecuta manualmente las siguientes consultas:</p>\n\n<p>CREATE TABLE IF NOT EXISTS <code>ps_bartender_bars</code> (\n  <code>id</code> int(11) NOT NULL AUTO<em>INCREMENT,\n  <code>bar_id</code> varchar(50) NOT NULL,\n  <code>name</code> varchar(100) NOT NULL,\n  <code>bartender_point</code> longtext NOT NULL,\n  <code>shop_point</code> longtext NOT NULL,\n  <code>bar_points</code> longtext NOT NULL,\n  <code>created_by</code> varchar(50) NOT NULL,\n  <code>created_at</code> timestamp NOT NULL DEFAULT CURRENT</em>TIMESTAMP,\n  PRIMARY KEY (<code>id</code>),\n  UNIQUE KEY <code>bar_id</code> (<code>bar_id</code>)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</p>\n\n<p>CREATE TABLE IF NOT EXISTS <code>ps_bartender_stats</code> (\n  <code>id</code> int(11) NOT NULL AUTO<em>INCREMENT,\n  <code>identifier</code> varchar(50) NOT NULL,\n  <code>experience</code> int(11) NOT NULL DEFAULT 0,\n  <code>total_drinks</code> int(11) NOT NULL DEFAULT 0,\n  <code>total_earnings</code> int(11) NOT NULL DEFAULT 0,\n  <code>total_time_worked</code> int(11) NOT NULL DEFAULT 0,\n  <code>shifts_completed</code> int(11) NOT NULL DEFAULT 0,\n  <code>created_at</code> timestamp NOT NULL DEFAULT CURRENT</em>TIMESTAMP,\n  <code>updated_at</code> timestamp NOT NULL DEFAULT CURRENT<em>TIMESTAMP ON UPDATE CURRENT</em>TIMESTAMP,\n  PRIMARY KEY (<code>id</code>),\n  UNIQUE KEY <code>identifier</code> (<code>identifier</code>)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;\n```</p>\n\n<h3>2. Archivos del Script</h3>\n\n<p>```bash</p>\n\n<h1>Coloca los archivos en la carpeta resources</h1>\n\n<p>resources/\n\u2514\u2500\u2500 ps<em>bartender/\n    \u251c\u2500\u2500 fxmanifest.lua\n    \u251c\u2500\u2500 config.lua\n    \u251c\u2500\u2500 client/\n    \u2502   \u2514\u2500\u2500 main.lua\n    \u251c\u2500\u2500 server/\n    \u2502   \u2514\u2500\u2500 main.lua\n    \u2514\u2500\u2500 ps</em>bartender.sql\n```</p>\n\n<h3>3. Configuraci\u00f3n del Servidor</h3>\n\n<p>```lua\n-- En tu server.cfg a\u00f1ade:\nensure ps_bartender</p>\n\n<p>-- Aseg\u00farate de que las dependencias est\u00e9n cargadas antes:\nensure es<em>extended\nensure ox</em>target\nensure ox_lib\nensure oxmysql\n```</p>\n\n<h2>\u2699\ufe0f Configuraci\u00f3n</h2>\n\n<h3>Configuraci\u00f3n de Jobs</h3>\n\n<p><code>lua\n-- En config.lua\nConfig.JobSettings = {\n    createNewJob = true, -- true = crear nuevo job, false = usar existente\n    existingJobName = 'bartender', -- Nombre del job existente\n    newJobData = {\n        name = 'bartender',\n        label = 'Bartender'\n    }\n}\n</code></p>\n\n<h3>Rangos y Salarios</h3>\n\n<p><code>lua\nConfig.JobGrades = {\n    [0] = { name = 'trainee', label = 'Aprendiz', salary = 200 },\n    [1] = { name = 'bartender', label = 'Bartender', salary = 350 },\n    [2] = { name = 'mixologist', label = 'Mix\u00f3logo', salary = 500 },\n    [3] = { name = 'headbartender', label = 'Jefe de Barra', salary = 700 },\n    [4] = { name = 'manager', label = 'Manager', salary = 1000 }\n}\n</code></p>\n\n<h3>Items por Rango</h3>\n\n<p><code>lua\nConfig.BartenderItems = {\n    {name = 'beer', label = 'Cerveza', price = 5, minGrade = 0}, -- Accesible desde Aprendiz\n    {name = 'cocktail_premium', label = 'Cocktail Premium', price = 25, minGrade = 3}, -- Solo Jefe de Barra+\n    -- ... m\u00e1s items\n}\n</code></p>\n\n<h2>\ud83c\udfae Uso del Script</h2>\n\n<h3>\ud83d\udc68\u200d\ud83d\udcbc Para Bartenders</h3>\n\n<h4>Comandos B\u00e1sicos</h4>\n\n<ul>\n<li><code>/bartender</code> - Abrir men\u00fa principal</li>\n</ul>\n\n<h4>Flujo de Trabajo</h4>\n\n<ol>\n<li><strong>Entrar en servicio</strong> desde el men\u00fa principal</li>\n<li><strong>Ir a un bar</strong> configurado</li>\n<li><strong>Posicionarse</strong> en el punto de bartender</li>\n<li><strong>Atender clientes</strong> y servir bebidas</li>\n<li><strong>Salir de servicio</strong> para recibir bonus y estad\u00edsticas</li>\n</ol>\n\n<h4>Sistema de Experiencia</h4>\n\n<ul>\n<li><strong>+5 XP</strong> por cada bebida servida</li>\n<li><strong>+50 XP</strong> por turno completado (m\u00ednimo 1 hora)</li>\n<li><strong>Subida autom\u00e1tica</strong> de rango al alcanzar requisitos</li>\n</ul>\n\n<h3>\ud83d\udc65 Para Clientes</h3>\n\n<h4>Interacci\u00f3n</h4>\n\n<ol>\n<li><strong>Acercarse</strong> a cualquier punto de barra</li>\n<li><strong>Interactuar</strong> con ox_target</li>\n<li><strong>Seleccionar bebida</strong> del men\u00fa</li>\n<li><strong>Elegir propina</strong> (opcional)</li>\n<li><strong>Esperar</strong> a que el bartender prepare la bebida</li>\n</ol>\n\n<h3>\ud83d\udee0\ufe0f Para Administradores</h3>\n\n<h4>Configuraci\u00f3n de Bares</h4>\n\n<ul>\n<li>Solo <strong>grado 2+</strong> puede crear/gestionar bares</li>\n<li><strong>Men\u00fa visual</strong> para colocar puntos</li>\n<li><strong>Sistema de coordenadas</strong> preciso</li>\n</ul>\n\n<h4>Comandos de Admin</h4>\n\n<p><code>lua\n/bartender_admin setgrade [playerID] [grado] -- Cambiar grado de jugador\n/bartender_admin reloadbars -- Recargar bares para todos\n</code></p>\n\n<h2>\ud83d\udcca Sistema de Estad\u00edsticas</h2>\n\n<h3>Estad\u00edsticas de Jugador</h3>\n\n<ul>\n<li><strong>Experiencia total</strong> acumulada</li>\n<li><strong>Bebidas servidas</strong> en total</li>\n<li><strong>Ingresos totales</strong> generados</li>\n<li><strong>Tiempo trabajado</strong> en horas</li>\n<li><strong>Turnos completados</strong> exitosamente</li>\n</ul>\n\n<h3>Progresi\u00f3n de Rangos</h3>\n\n<p>| Rango | Experiencia Requerida | Salario | Permisos |\n|-------|----------------------|---------|----------|\n| Aprendiz (0) | 0 XP | $200 | Items b\u00e1sicos |\n| Bartender (1) | 500 XP | $350 | Alcoholes |\n| Mix\u00f3logo (2) | 1,200 XP | $500 | Cocktails b\u00e1sicos + gesti\u00f3n |\n| Jefe de Barra (3) | 2,500 XP | $700 | Cocktails premium |\n| Manager (4) | 5,000 XP | $1,000 | Todo disponible |</p>\n\n<h2>\ud83c\udfa8 Personalizaci\u00f3n</h2>\n\n<h3>A\u00f1adir Nuevos Items</h3>\n\n<p><code>lua\n-- En config.lua, a\u00f1ade a Config.BartenderItems:\n{\n    name = 'mi_bebida', \n    label = 'Mi Bebida Especial', \n    price = 20, \n    minGrade = 2\n}\n</code></p>\n\n<h3>Modificar Animaciones</h3>\n\n<p><code>lua\n-- En config.lua, a\u00f1ade a Config.BartenderAnimations:\n{\n    dict = 'tu_diccionario', \n    anim = 'tu_animacion', \n    duration = 4000, \n    label = 'Descripci\u00f3n'\n}\n</code></p>\n\n<h3>Configurar Propinas</h3>\n\n<p><code>lua\nConfig.Tips = {\n    enabled = true, -- Habilitar sistema de propinas\n    minTip = 1, -- Propina m\u00ednima\n    maxTip = 100, -- Propina m\u00e1xima\n    suggested = {5, 10, 15, 20} -- Propinas sugeridas\n}\n</code></p>\n\n<h2>\ud83d\udc1b Soluci\u00f3n de Problemas</h2>\n\n<h3>Problemas Comunes</h3>\n\n<h4>El men\u00fa no se abre</h4>\n\n<ul>\n<li>\u2705 Verificar que ox_lib est\u00e9 actualizado</li>\n<li>\u2705 Comprobar que el jugador tenga el job de bartender</li>\n<li>\u2705 Revisar la consola por errores</li>\n</ul>\n\n<h4>No se pueden crear bares</h4>\n\n<ul>\n<li>\u2705 Verificar permisos (grado 2+ requerido)</li>\n<li>\u2705 Comprobar conexi\u00f3n a MySQL</li>\n<li>\u2705 Verificar que las tablas existan</li>\n</ul>\n\n<h4>Las animaciones no funcionan</h4>\n\n<ul>\n<li>\u2705 Verificar que los diccionarios de animaci\u00f3n existan</li>\n<li>\u2705 Comprobar la versi\u00f3n del juego</li>\n<li>\u2705 Revisar conflictos con otros scripts</li>\n</ul>\n\n<h4>Base de datos no conecta</h4>\n\n<p><code>lua\n-- Verificar configuraci\u00f3n en server.cfg:\nset mysql_connection_string \"mysql://usuario:contrase\u00f1a@localhost/basededatos\"\n</code></p>\n\n<h3>Logs y Debug</h3>\n\n<p>El script incluye logs detallados en la consola del servidor. Para mayor debug:</p>\n\n<p><code>lua\n-- En config.lua a\u00f1adir:\nConfig.Debug = true -- Habilita logs adicionales\n</code></p>\n\n<h2>\ud83e\udd1d Contribuir</h2>\n\n<h3>Reportar Bugs</h3>\n\n<ol>\n<li>Usar el sistema de <strong>Issues</strong> de GitHub</li>\n<li>Incluir <strong>pasos para reproducir</strong></li>\n<li><strong>Logs de consola</strong> si es posible</li>\n<li><strong>Versiones</strong> de dependencias</li>\n</ol>\n\n<h3>Sugerir Mejoras</h3>\n\n<ol>\n<li><strong>Fork</strong> del repositorio</li>\n<li><strong>Crear rama</strong> para tu feature</li>\n<li><strong>Commit</strong> con descripci\u00f3n clara</li>\n<li><strong>Pull Request</strong> con detalles</li>\n</ol>\n\n<h2>\ud83d\udcc4 Licencia</h2>\n\n<p>Este proyecto est\u00e1 bajo la <strong>Licencia MIT</strong>. Ver el archivo <code>LICENSE</code> para m\u00e1s detalles.</p>\n\n<h2>\ud83d\ude4f Cr\u00e9ditos</h2>\n\n<ul>\n<li><strong>Framework</strong>: ESX Team</li>\n<li><strong>UI Library</strong>: Overextended (ox_lib)</li>\n<li><strong>Target System</strong>: Overextended (ox_target)</li>\n<li><strong>Database</strong>: Overextended (oxmysql)</li>\n</ul>\n\n<h2>\ud83d\udcde Soporte</h2>\n\n<ul>\n<li><strong>Discord</strong>: [Tu servidor de Discord]</li>\n<li><strong>GitHub</strong>: [Issues del repositorio]</li>\n<li><strong>Documentaci\u00f3n</strong>: [Wiki del proyecto]</li>\n</ul>\n\n<hr />\n\n<h3>\ud83d\udd04 Historial de Versiones</h3>\n\n<h4>v2.0.0 (Actual)</h4>\n\n<ul>\n<li>\u2705 Sistema completo de jobs y rangos</li>\n<li>\u2705 Base de datos MySQL</li>\n<li>\u2705 Sistema de experiencia y progresi\u00f3n</li>\n<li>\u2705 Propinas y estad\u00edsticas avanzadas</li>\n</ul>\n\n<h4>v1.0.0</h4>\n\n<ul>\n<li>\u2705 Sistema b\u00e1sico de bartender</li>\n<li>\u2705 Configuraci\u00f3n IC de bares</li>\n<li>\u2705 Animaciones b\u00e1sicas</li>\n</ul>\n\n<hr />\n\n<p><strong>\u00a1Disfruta del sistema de bartender m\u00e1s completo para FiveM!</strong> \ud83c\udf7b</p>\n", "text": "\ud83c\udf7a ps_bartender - sistema avanzado de bartender para fivem\n\nun sistema completo de bartender para fivem con framework esx que incluye sistema de jobs, rangos, experiencia, base de datos mysql y configuraci\u00f3n in-character.\n\n\n\n\n\n\ud83d\udccb caracter\u00edsticas principales\n\n\ud83c\udfaf sistema de jobs y rangos\n\n\n5 rangos profesionales con salarios diferenciados\nprogresi\u00f3n autom\u00e1tica basada en experiencia\nrestricciones por rango para items especiales\ncreaci\u00f3n autom\u00e1tica de job o integraci\u00f3n con jobs existentes\n\n\n\ud83c\udfd7\ufe0f configuraci\u00f3n in-character\n\n\nmen\u00fa intuitivo estilo jobcreator con /bartender\npuntos configurables: bartender, tienda y m\u00faltiples puntos de barra\nsistema visual de configuraci\u00f3n con coordenadas precisas\ngesti\u00f3n completa de bares existentes\n\n\n\ud83d\udcb0 sistema econ\u00f3mico avanzado\n\n\nsalarios por rango (desde $200 hasta $1000)\nsistema de propinas completamente configurable\nbonus por tiempo trabajado y turnos completados\ndistribuci\u00f3n inteligente de ganancias (70% bartender, 30% casa)\n\n\n\ud83d\udcca sistema de experiencia\n\n\nxp por bebida servida y turnos completados\nsubida autom\u00e1tica de rango al alcanzar requisitos\nestad\u00edsticas detalladas por jugador\nseguimiento completo de progreso\n\n\n\ud83c\udfad animaciones y realismo\n\n\nm\u00faltiples animaciones de preparaci\u00f3n de bebidas\nanimaciones aleatorias para variedad\nsistema de turnos con seguimiento de tiempo\nintegraci\u00f3n completa con ox_target\n\n\n\ud83d\uddc4\ufe0f base de datos mysql\n\n\npersistencia completa de configuraciones\nestad\u00edsticas avanzadas de jugadores\nsistema de backup autom\u00e1tico\noptimizaci\u00f3n para servidores grandes\n\n\n\ud83d\udce6 dependencias\n\n\n\u2705 es_extended (framework principal)\n\u2705 ox_target (sistema de interacciones)\n\u2705 ox_lib (librer\u00eda de interfaces)\n\u2705 oxmysql (conector de base de datos)\n\n\n\ud83d\ude80 instalaci\u00f3n\n\n1. base de datos\n\n```sql\n-- ejecuta el archivo ps_bartender.sql en tu base de datos\n-- o ejecuta manualmente las siguientes consultas:\n\ncreate table if not exists ps_bartender_bars (\n  id int(11) not null autoincrement,\n  bar_id varchar(50) not null,\n  name varchar(100) not null,\n  bartender_point longtext not null,\n  shop_point longtext not null,\n  bar_points longtext not null,\n  created_by varchar(50) not null,\n  created_at timestamp not null default currenttimestamp,\n  primary key (id),\n  unique key bar_id (bar_id)\n) engine=innodb default charset=utf8mb4;\n\ncreate table if not exists ps_bartender_stats (\n  id int(11) not null autoincrement,\n  identifier varchar(50) not null,\n  experience int(11) not null default 0,\n  total_drinks int(11) not null default 0,\n  total_earnings int(11) not null default 0,\n  total_time_worked int(11) not null default 0,\n  shifts_completed int(11) not null default 0,\n  created_at timestamp not null default currenttimestamp,\n  updated_at timestamp not null default currenttimestamp on update currenttimestamp,\n  primary key (id),\n  unique key identifier (identifier)\n) engine=innodb default charset=utf8mb4;\n```\n\n2. archivos del script\n\n```bash\n\ncoloca los archivos en la carpeta resources\n\nresources/\n\u2514\u2500\u2500 psbartender/\n    \u251c\u2500\u2500 fxmanifest.lua\n    \u251c\u2500\u2500 config.lua\n    \u251c\u2500\u2500 client/\n    \u2502   \u2514\u2500\u2500 main.lua\n    \u251c\u2500\u2500 server/\n    \u2502   \u2514\u2500\u2500 main.lua\n    \u2514\u2500\u2500 psbartender.sql\n```\n\n3. configuraci\u00f3n del servidor\n\n```lua\n-- en tu server.cfg a\u00f1ade:\nensure ps_bartender\n\n-- aseg\u00farate de que las dependencias est\u00e9n cargadas antes:\nensure esextended\nensure oxtarget\nensure ox_lib\nensure oxmysql\n```\n\n\u2699\ufe0f configuraci\u00f3n\n\nconfiguraci\u00f3n de jobs\n\nlua\n-- en config.lua\nconfig.jobsettings = {\n    createnewjob = true, -- true = crear nuevo job, false = usar existente\n    existingjobname = 'bartender', -- nombre del job existente\n    newjobdata = {\n        name = 'bartender',\n        label = 'bartender'\n    }\n}\n\n\nrangos y salarios\n\nlua\nconfig.jobgrades = {\n    [0] = { name = 'trainee', label = 'aprendiz', salary = 200 },\n    [1] = { name = 'bartender', label = 'bartender', salary = 350 },\n    [2] = { name = 'mixologist', label = 'mix\u00f3logo', salary = 500 },\n    [3] = { name = 'headbartender', label = 'jefe de barra', salary = 700 },\n    [4] = { name = 'manager', label = 'manager', salary = 1000 }\n}\n\n\nitems por rango\n\nlua\nconfig.bartenderitems = {\n    {name = 'beer', label = 'cerveza', price = 5, mingrade = 0}, -- accesible desde aprendiz\n    {name = 'cocktail_premium', label = 'cocktail premium', price = 25, mingrade = 3}, -- solo jefe de barra+\n    -- ... m\u00e1s items\n}\n\n\n\ud83c\udfae uso del script\n\n\ud83d\udc68\u200d\ud83d\udcbc para bartenders\n\ncomandos b\u00e1sicos\n\n\n/bartender - abrir men\u00fa principal\n\n\nflujo de trabajo\n\n\nentrar en servicio desde el men\u00fa principal\nir a un bar configurado\nposicionarse en el punto de bartender\natender clientes y servir bebidas\nsalir de servicio para recibir bonus y estad\u00edsticas\n\n\nsistema de experiencia\n\n\n+5 xp por cada bebida servida\n+50 xp por turno completado (m\u00ednimo 1 hora)\nsubida autom\u00e1tica de rango al alcanzar requisitos\n\n\n\ud83d\udc65 para clientes\n\ninteracci\u00f3n\n\n\nacercarse a cualquier punto de barra\ninteractuar con ox_target\nseleccionar bebida del men\u00fa\nelegir propina (opcional)\nesperar a que el bartender prepare la bebida\n\n\n\ud83d\udee0\ufe0f para administradores\n\nconfiguraci\u00f3n de bares\n\n\nsolo grado 2+ puede crear/gestionar bares\nmen\u00fa visual para colocar puntos\nsistema de coordenadas preciso\n\n\ncomandos de admin\n\nlua\n/bartender_admin setgrade [playerid] [grado] -- cambiar grado de jugador\n/bartender_admin reloadbars -- recargar bares para todos\n\n\n\ud83d\udcca sistema de estad\u00edsticas\n\nestad\u00edsticas de jugador\n\n\nexperiencia total acumulada\nbebidas servidas en total\ningresos totales generados\ntiempo trabajado en horas\nturnos completados exitosamente\n\n\nprogresi\u00f3n de rangos\n\n| rango | experiencia requerida | salario | permisos |\n|-------|----------------------|---------|----------|\n| aprendiz (0) | 0 xp | $200 | items b\u00e1sicos |\n| bartender (1) | 500 xp | $350 | alcoholes |\n| mix\u00f3logo (2) | 1,200 xp | $500 | cocktails b\u00e1sicos + gesti\u00f3n |\n| jefe de barra (3) | 2,500 xp | $700 | cocktails premium |\n| manager (4) | 5,000 xp | $1,000 | todo disponible |\n\n\ud83c\udfa8 personalizaci\u00f3n\n\na\u00f1adir nuevos items\n\nlua\n-- en config.lua, a\u00f1ade a config.bartenderitems:\n{\n    name = 'mi_bebida', \n    label = 'mi bebida especial', \n    price = 20, \n    mingrade = 2\n}\n\n\nmodificar animaciones\n\nlua\n-- en config.lua, a\u00f1ade a config.bartenderanimations:\n{\n    dict = 'tu_diccionario', \n    anim = 'tu_animacion', \n    duration = 4000, \n    label = 'descripci\u00f3n'\n}\n\n\nconfigurar propinas\n\nlua\nconfig.tips = {\n    enabled = true, -- habilitar sistema de propinas\n    mintip = 1, -- propina m\u00ednima\n    maxtip = 100, -- propina m\u00e1xima\n    suggested = {5, 10, 15, 20} -- propinas sugeridas\n}\n\n\n\ud83d\udc1b soluci\u00f3n de problemas\n\nproblemas comunes\n\nel men\u00fa no se abre\n\n\n\u2705 verificar que ox_lib est\u00e9 actualizado\n\u2705 comprobar que el jugador tenga el job de bartender\n\u2705 revisar la consola por errores\n\n\nno se pueden crear bares\n\n\n\u2705 verificar permisos (grado 2+ requerido)\n\u2705 comprobar conexi\u00f3n a mysql\n\u2705 verificar que las tablas existan\n\n\nlas animaciones no funcionan\n\n\n\u2705 verificar que los diccionarios de animaci\u00f3n existan\n\u2705 comprobar la versi\u00f3n del juego\n\u2705 revisar conflictos con otros scripts\n\n\nbase de datos no conecta\n\nlua\n-- verificar configuraci\u00f3n en server.cfg:\nset mysql_connection_string \"mysql://usuario:contrase\u00f1a@localhost/basededatos\"\n\n\nlogs y debug\n\nel script incluye logs detallados en la consola del servidor. para mayor debug:\n\nlua\n-- en config.lua a\u00f1adir:\nconfig.debug = true -- habilita logs adicionales\n\n\n\ud83e\udd1d contribuir\n\nreportar bugs\n\n\nusar el sistema de issues de github\nincluir pasos para reproducir\nlogs de consola si es posible\nversiones de dependencias\n\n\nsugerir mejoras\n\n\nfork del repositorio\ncrear rama para tu feature\ncommit con descripci\u00f3n clara\npull request con detalles\n\n\n\ud83d\udcc4 licencia\n\neste proyecto est\u00e1 bajo la licencia mit. ver el archivo license para m\u00e1s detalles.\n\n\ud83d\ude4f cr\u00e9ditos\n\n\nframework: esx team\nui library: overextended (ox_lib)\ntarget system: overextended (ox_target)\ndatabase: overextended (oxmysql)\n\n\n\ud83d\udcde soporte\n\n\ndiscord: [tu servidor de discord]\ngithub: [issues del repositorio]\ndocumentaci\u00f3n: [wiki del proyecto]\n\n\n\n\n\ud83d\udd04 historial de versiones\n\nv2.0.0 (actual)\n\n\n\u2705 sistema completo de jobs y rangos\n\u2705 base de datos mysql\n\u2705 sistema de experiencia y progresi\u00f3n\n\u2705 propinas y estad\u00edsticas avanzadas\n\n\nv1.0.0\n\n\n\u2705 sistema b\u00e1sico de bartender\n\u2705 configuraci\u00f3n ic de bares\n\u2705 animaciones b\u00e1sicas\n\n\n\n\n\u00a1disfruta del sistema de bartender m\u00e1s completo para fivem! \ud83c\udf7b\n"};
-
-// Helper: show a readme by safe_id
-function showReadme(safe_id){
-  const viewer = document.getElementById('readme-viewer');
-  const title = document.getElementById('readme-title');
-  const content = document.getElementById('readme-content');
-  if(!READMES[safe_id]){
-    title.textContent = "README no encontrado";
-    content.innerHTML = "<p>No se encontró el README solicitado.</p>";
-  } else {
-    title.textContent = READMES[safe_id].filename;
-    content.innerHTML = READMES[safe_id].html;
-  }
-  viewer.style.display = 'block';
-  viewer.setAttribute('aria-hidden','false');
-  viewer.scrollTop = 0;
-}
-
-// Try to auto-map checkboxes to readmes by matching texts
-function tryAttachToCheckboxes(){
-  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-  checkboxes.forEach(cb => {
-    if(cb.dataset.readmeId){
-      cb.addEventListener('change', ()=>{ if(cb.checked) showReadme(cb.dataset.readmeId); });
-      return;
-    }
-    let hints = [];
-    if(cb.id) hints.push(cb.id);
-    if(cb.name) hints.push(cb.name);
-    if(cb.value) hints.push(cb.value);
-    const lab = document.querySelector('label[for="'+cb.id+'"]');
-    if(lab) hints.push(lab.textContent || lab.innerText);
-    if(cb.parentElement) hints.push(cb.parentElement.textContent || cb.parentElement.innerText);
-    const hintStr = hints.join(' ').toLowerCase();
-    let best = null;
-    let bestScore = 0;
-    for(const key in READMES){
-      const t = READMES[key].text;
-      const words = hintStr.split(/[^a-z0-9]+/).filter(Boolean);
-      let score = 0;
-      for(const w of words){
-        if(w.length<3) continue;
-        if(t.indexOf(w) !== -1) score += 1;
-      }
-      if(score > bestScore){
-        bestScore = score;
-        best = key;
-      }
-    }
-    if(best && bestScore>0){
-      cb.dataset.readmeId = best;
-      cb.addEventListener('change', ()=>{ if(cb.checked) showReadme(cb.dataset.readmeId); });
-      const hintSpan = document.createElement('span');
-      hintSpan.textContent = ' 🔎';
-      hintSpan.title = 'Este checkbox está vinculado automáticamente al README: ' + READMES[best].filename;
-      if(cb.parentElement) cb.parentElement.appendChild(hintSpan);
-    } else {
-      cb.addEventListener('change', ()=>{
-        if(!cb.checked) return;
-        const chooserHtml = Object.keys(READMES).map(k => `<div><a class="readme-link" data-id="${k}">${READMES[k].filename}</a></div>`).join('');
-        const content = document.getElementById('readme-content');
-        document.getElementById('readme-title').textContent = 'Elige README para este checkbox';
-        content.innerHTML = '<p>No se pudo asignar automáticamente un README. Elige uno:</p>' + chooserHtml;
-        setTimeout(()=>{
-          document.querySelectorAll('.readme-link').forEach(a=>{
-            a.addEventListener('click', (e)=>{
-              const id = e.target.dataset.id;
-              showReadme(id);
-            });
-          });
-        },50);
-        document.getElementById('readme-viewer').style.display = 'block';
-      });
-    }
-  });
-}
-
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', tryAttachToCheckboxes);
-} else {
-  tryAttachToCheckboxes();
-}
-</script>
-<!-- END INJECTED -->
 </body>
 </html>
