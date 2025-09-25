@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS Admin 2.0 - Documentación</title>
+    <meta name="description" content="Documentación completa para PS Admin 2.0 - Sistema Avanzado de Administración para FiveM">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Prism.js para resaltado de código -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #40E082;
+            --secondary-color: #2DD4BF;
+            --dark-bg: #0f172a;
+            --card-bg: #1a2332;
+            --text-light: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: var(--text-light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark-bg);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(64, 224, 130, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .navbar {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(64, 224, 130, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(64, 224, 130, 0.4);
+            background: var(--gradient);
+        }
+        
+        .btn-outline-light {
+            border-color: var(--border-color);
+            color: var(--text-light);
+            margin-left: 15px;
+            padding: 12px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            background: var(--gradient);
+            border-color: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .card-header {
+            background: var(--gradient);
+            color: var(--dark-bg);
+            font-weight: bold;
+            border-bottom: none;
+            border-radius: 15px 15px 0 0 !important;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .code-block {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .code-block code {
+            color: var(--text-light);
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1e293b 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stats-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            background: var(--dark-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-muted) !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .badge-version {
+            background: var(--gradient);
+            color: var(--dark-bg);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(64, 224, 130, 0.3);
+        }
+        
+        .installation-steps {
+            counter-reset: step-counter;
+        }
+        
+        .installation-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .installation-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--gradient);
+            color: var(--dark-bg);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .compatibility-badge {
+            display: inline-block;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .compatibility-badge:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient);
+            color: var(--dark-bg);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(64, 224, 130, 0.3);
+        }
+        
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(64, 224, 130, 0.4);
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn-outline-light {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-shield-alt me-2"></i>PS Admin 2.0
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Volver al Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#installation">Instalación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#configuration">Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#api">API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#support">Soporte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">PS Admin 2.0</h1>
+                    <p class="hero-subtitle">El Sistema Definitivo de Administración para FiveM</p>
+                    <span class="badge-version">v2.0.0 Phoenix</span>
+                    <p class="mt-4 lead">Sistema completo y rico en características para la administración de servidores FiveM con monitoreo avanzado, herramientas de moderación y capacidades de gestión integral.</p>
+                    <div class="mt-4">
+                        <a href="#installation" class="btn btn-primary">Comenzar</a>
+                        <a href="https://github.com/ps-development/ps_admin" class="btn btn-outline-light">
+                            <i class="fab fa-github me-2"></i>Ver en GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">50+</div>
+                        <div class="stats-label">Comandos de Admin</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">15+</div>
+                        <div class="stats-label">Paneles de Gestión</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">100+</div>
+                        <div class="stats-label">Opciones de Configuración</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">3</div>
+                        <div class="stats-label">Frameworks Compatibles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Características -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Características Integrales</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h5 class="card-title">Gestión de Jugadores</h5>
+                            <p class="card-text">Supervisión completa de jugadores con perfiles detallados, sistema de notas, historial de acciones y herramientas de moderación integral.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h5 class="card-title">Monitoreo en Tiempo Real</h5>
+                            <p class="card-text">Monitoreo avanzado del servidor con estadísticas en vivo, métricas de rendimiento y sistema de alertas automatizado.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h5 class="card-title">Moderación Avanzada</h5>
+                            <p class="card-text">Suite integral de moderación con bans, advertencias, sistema de cárcel y herramientas de aplicación automatizada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h5 class="card-title">Centro de Comunicación</h5>
+                            <p class="card-text">Sistema de chat para staff con canales, gestión de reportes con chat integrado y sistema de anuncios.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h5 class="card-title">Gestión de Eventos</h5>
+                            <p class="card-text">Sistema completo de eventos con programación, gestión de participantes, recompensas y eventos recurrentes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h5 class="card-title">Base de Datos de Items</h5>
+                            <p class="card-text">Gestión integral de items con categorías, presets de entrega rápida y registro de transacciones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Compatibilidad -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Compatibilidad de Frameworks</h2>
+            <div class="text-center">
+                <span class="compatibility-badge">ESX Legacy</span>
+                <span class="compatibility-badge">QBCore</span>
+                <span class="compatibility-badge">Standalone</span>
+                <span class="compatibility-badge">ox_inventory</span>
+                <span class="compatibility-badge">qb-inventory</span>
+                <span class="compatibility-badge">ox_target</span>
+                <span class="compatibility-badge">qb-target</span>
+                <span class="compatibility-badge">Integración Discord</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Instalación -->
+    <section id="installation" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Guía de Instalación</h2>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Instalación Rápida</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="installation-steps">
+                                <div class="installation-step">
+                                    <h6>Descargar y Extraer</h6>
+                                    <p>Descarga la última versión y extrae en tu carpeta de resources</p>
+                                    <div class="code-block">
+                                        <code>resources/[admin]/ps_admin/</code>
+                                    </div>
+                                </div>
+                                
+                                <div class="installation-step">
+                                    <h6>Configuración de Base de Datos</h6>
+                                    <p>Importa el archivo SQL para crear las tablas necesarias</p>
+                                    <div class="code-block">
+                                        <code>mysql -u usuario -p nombre_base_datos < database_tables.sql</code>
+                                    </div>
+                                </div>
+                                
+                                <div class="installation-step">
+                                    <h6>Configuración</h6>
+                                    <p>Edita config.lua para que coincida con la configuración de tu servidor</p>
+                                    <div class="code-block">
+                                        <code>Config.Framework = 'esx' -- o 'qb-core'<br>
+Config.AdminCommand = 'admin'<br>
+Config.QuickMenuKey = 'F4'</code>
+                                    </div>
+                                </div>
+                                
+                                <div class="installation-step">
+                                    <h6>Configuración de Permisos</h6>
+                                    <p>Configura los permisos ACE en tu server.cfg</p>
+                                    <div class="code-block">
+                                        <code>add_ace group.admin admin.* allow<br>
+add_principal identifier.steam:TU_STEAM_HEX group.admin</code>
+                                    </div>
+                                </div>
+                                
+                                <div class="installation-step">
+                                    <h6>Iniciar Recurso</h6>
+                                    <p>Añade a tu server.cfg e inicia</p>
+                                    <div class="code-block">
+                                        <code>ensure ps_admin</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Configuración -->
+    <section id="configuration" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Configuración</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Configuración Principal</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>El archivo principal config.lua contiene todas las configuraciones esenciales:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Selección de Framework</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Sistema de Permisos</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Configuraciones de Base de Datos</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Personalización de UI</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Configuración de Comandos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Configuraciones Avanzadas</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Ajusta tu sistema de administración con opciones avanzadas:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Optimización de Rendimiento</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Configuraciones de Seguridad</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Configuración de Logging</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Integración con Discord</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Sistema de Respaldo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Referencia API -->
+    <section id="api" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Referencia de API</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Exports del Servidor</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-lua">-- Verificar si el jugador es admin
+exports['ps_admin']:IsPlayerAdmin(source)
+
+-- Banear un jugador
+exports['ps_admin']:BanPlayer(source, reason, duration)
+
+-- Crear un evento
+exports['ps_admin']:CreateEvent(adminSource, eventData)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Exports del Cliente</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-lua">-- Abrir menú de admin
+exports['ps_admin']:OpenAdminMenu()
+
+-- Verificar estado noclip
+exports['ps_admin']:IsNoclipEnabled()
+
+-- Mostrar notificación
+exports['ps_admin']:ShowNotification(message, type)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Eventos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-lua">-- Escuchar acciones de admin
+AddEventHandler('PSAdmin:PlayerBanned', function(data)
+    print('Jugador baneado:', data.playerName)
+end)
+
+-- Activar eventos personalizados
+TriggerEvent('PSAdmin:CustomAction', data)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Soporte -->
+    <section id="support" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Soporte y Comunidad</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fab fa-discord fa-3x text-primary mb-3"></i>
+                            <h5>Comunidad Discord</h5>
+                            <p>Únete a nuestro servidor de Discord para soporte, actualizaciones y discusiones de la comunidad.</p>
+                            <a href="#" class="btn btn-primary">Unirse a Discord</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fab fa-github fa-3x text-primary mb-3"></i>
+                            <h5>Issues de GitHub</h5>
+                            <p>Reporta bugs, solicita características o contribuye al proyecto en GitHub.</p>
+                            <a href="https://github.com/ps-development/ps_admin/issues" class="btn btn-primary">Ver Issues</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-book fa-3x text-primary mb-3"></i>
+                            <h5>Documentación</h5>
+                            <p>Guías completas, tutoriales y documentación de la API.</p>
+                            <a href="#" class="btn btn-primary">Leer Documentación</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>PS Admin 2.0</h5>
+                    <p class="text-muted">El sistema definitivo de administración para FiveM, construido para rendimiento, confiabilidad y facilidad de uso.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Enlaces Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#installation" class="text-muted">Instalación</a></li>
+                        <li><a href="#configuration" class="text-muted">Configuración</a></li>
+                        <li><a href="#api" class="text-muted">Referencia API</a></li>
+                        <li><a href="#support" class="text-muted">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Recursos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Changelog</a></li>
+                        <li><a href="#" class="text-muted">Tutoriales</a></li>
+                        <li><a href="#" class="text-muted">Ejemplos</a></li>
+                        <li><a href="#" class="text-muted">Comunidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: var(--border-color);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">&copy; 2024 Equipo de Desarrollo PS. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <span class="text-muted">Versión 2.0.0 Phoenix</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Scroll to Top -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+        // Smooth scrolling para enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Funcionalidad scroll to top
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Resaltado de navegación activa
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function highlightNavigation() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavigation);
+
+        // Animaciones al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animaciones
+        document.querySelectorAll('.card, .stats-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
