@@ -16,23 +16,75 @@
     
     <style>
         :root {
-            --primary-color: #40E082;
-            --secondary-color: #2DD4BF;
-            --dark-bg: #0f172a;
-            --card-bg: #1a2332;
-            --text-light: #ffffff;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        }
-        
-        body {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
-            color: var(--text-light);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    --primary-color: #40E082;
+    --secondary-color: #2DD4BF;
+    --dark-bg: #0f172a;
+    --card-bg: #1a2332;
+    --text-light: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #cbd5e1;
+    --border-color: #334155;
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+        color: var(--text-light);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Texto principal */
+    .card-text, p, li {
+        color: var(--text-light) !important;
+    }
+
+    /* Títulos de tarjetas */
+    .card-title, h5, h6 {
+        color: var(--text-light) !important;
+    }
+
+    /* Texto secundario pero visible */
+    .text-muted {
+        color: var(--text-secondary) !important;
+    }
+
+    /* Lista sin estilo */
+    .list-unstyled li {
+        color: var(--text-light) !important;
+    }
+
+    /* Contenido de código */
+    .code-block code {
+        color: var(--text-light) !important;
+    }
+
+    /* Enlaces del footer */
+    .footer a {
+        color: var(--text-secondary) !important;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: var(--text-light) !important;
+    }
+
+    /* Estadísticas */
+    .stats-label {
+        color: var(--text-light) !important;
+        font-size: 1.1rem;
+    }
+
+    /* Subtítulos hero */
+    .hero-subtitle {
+        color: var(--text-light) !important;
+    }
+
+    /* Lead text */
+    .lead {
+        color: var(--text-light) !important;
+    }
 
         /* Animated background */
         .bg-animation {
