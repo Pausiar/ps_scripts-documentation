@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Tank System - Documentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ef4444;
+            --primary-dark: #dc2626;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --dark-secondary: #1e293b;
+            --dark-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .version {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-tertiary);
+            color: var(--text-primary);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-main {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .content-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-card h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary);
+        }
+
+        .content-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .content-card ul, .content-card ol {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            color: var(--text-primary);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-card a:hover {
+            color: var(--primary);
+            background: var(--dark-tertiary);
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            background: var(--dark-secondary);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .feature-item strong {
+            color: var(--primary);
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--warning);
+            color: #fbbf24;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+            color: #6ee7b7;
+        }
+
+        .changelog-item {
+            background: var(--dark-secondary);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--success);
+        }
+
+        .changelog-item h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🛡️ Anti-Tank System</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Volver al Inicio</a></li>
+                <li><a href="https://github.com/Pausiar/anti-tank">GitHub</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#instalacion">Instalación</a></li>
+                <li><a href="#configuracion">Configuración</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <div class="version">Versión 1.1.0</div>
+                <h1>Anti-Tanqueo para FiveM</h1>
+                <p>Script diseñado para mejorar la experiencia de rol en servidores FiveM, evitando el tanqueo y aportando realismo cuando un jugador recibe un headshot.</p>
+                <div class="hero-actions">
+                    <a href="https://github.com/Pausiar/anti-tank" class="btn btn-primary">Descargar de GitHub</a>
+                    <a href="#instalacion" class="btn btn-secondary">Guía de Instalación</a>
+                </div>
+            </section>
+
+            <div class="content-grid">
+                <div class="content-main">
+                    <!-- Características -->
+                    <section class="content-card" id="caracteristicas">
+                        <h2>✨ Características Principales</h2>
+                        
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <strong>🔫 Sistema de Headshots</strong>
+                                <p>Detección precisa de headshots con efectos realistas</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>⚰️ Muerte Directa</strong>
+                                <p>Opción configurable para muerte instantánea por headshot</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>🤕 Estado de Inconsciencia</strong>
+                                <p>Desmayo temporal de 4 segundos con efectos visuales</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>🍺 Efecto Borracho</strong>
+                                <p>Simulación de desorientación tras el impacto</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>⚙️ Altamente Configurable</strong>
+                                <p>Ajusta duración, efectos y comportamientos</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>🚀 Optimizado</strong>
+                                <p>Código ligero sin afectar el rendimiento del servidor</p>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <strong>💡 Realismo Mejorado:</strong> Este script añade una capa extra de realismo al combate, haciendo que los headshots tengan consecuencias más significativas y reduciendo el "tanqueo" en situaciones de roleplay.
+                        </div>
+                    </section>
+
+                    <!-- Instalación -->
+                    <section class="content-card" id="instalacion">
+                        <h2>📦 Instalación</h2>
+                        
+                        <h3>Paso 1: Descarga</h3>
+                        <p>Descarga el recurso desde el repositorio de GitHub y colócalo en tu carpeta <code>resources/</code>.</p>
+
+                        <h3>Paso 2: Configuración del Servidor</h3>
+                        <p>Añade la siguiente línea a tu archivo <code>server.cfg</code>:</p>
+                        
+                        <div class="code-block">
+                            <pre>ensure ps_antitank</pre>
+                        </div>
+
+                        <h3>Paso 3: Reinicio</h3>
+                        <p>Reinicia tu servidor y el script estará funcionando automáticamente.</p>
+
+                        <div class="alert alert-success">
+                            <strong>✅ ¡Instalación Completada!</strong> El script comenzará a funcionar inmediatamente sin necesidad de configuración adicional.
+                        </div>
+                    </section>
+
+                    <!-- Configuración -->
+                    <section class="content-card" id="configuracion">
+                        <h2>⚙️ Configuración</h2>
+                        
+                        <p>En el archivo de configuración puedes ajustar los siguientes parámetros:</p>
+
+                        <h3>Opciones Principales</h3>
+                        <ul>
+                            <li><strong>Duración del estado de inconsciencia:</strong> Configura cuánto tiempo permanece inconsciente el jugador</li>
+                            <li><strong>Efectos visuales y sonoros:</strong> Activa/desactiva el efecto borracho y otras animaciones</li>
+                            <li><strong>Modo de muerte:</strong> Elige entre muerte instantánea o desmayo temporal</li>
+                            <li><strong>Sensibilidad de detección:</strong> Ajusta la precisión del sistema de headshots</li>
+                        </ul>
+
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Configuración Recomendada:</strong> Para servidores de roleplay serio, se recomienda usar el modo de desmayo con efectos visuales activados para mantener el flujo narrativo.
+                        </div>
+
+                        <h3>Ejemplo de Configuración</h3>
+                        <div class="code-block">
+                            <pre>Config = {
+    unconsciousTime = 4000,  -- 4 segundos
+    drunkEffect = true,      -- Activar efecto borracho
+    instantDeath = false,    -- Desmayo en lugar de muerte
+    headshotOnly = true      -- Solo headshots activan el efecto
+}</pre>
+                        </div>
+                    </section>
+
+                    <!-- Changelog -->
+                    <section class="content-card" id="changelog">
+                        <h2>📝 Historial de Versiones</h2>
+                        
+                        <div class="changelog-item">
+                            <h4>v1.1.0 - Actualización de Efectos</h4>
+                            <ul>
+                                <li>🆕 Añadido efecto borracho durante el desmayo</li>
+                                <li>⚙️ Mejorada la detección de headshots</li>
+                                <li>🐞 Correcciones menores de estabilidad</li>
+                                <li>📊 Optimización del rendimiento</li>
+                            </ul>
+                        </div>
+
+                        <div class="changelog-item">
+                            <h4>v1.0.0 - Lanzamiento Inicial</h4>
+                            <ul>
+                                <li>🚀 Primera versión del sistema anti-tanqueo</li>
+                                <li>🔫 Sistema básico de detección de headshots</li>
+                                <li>⚰️ Opciones de muerte directa y desmayo</li>
+                                <li>⚙️ Configuración básica del script</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Preview -->
+                    <section class="content-card" id="preview">
+                        <h2>📸 Vista Previa</h2>
+                        <p>Puedes ver el script en acción en el siguiente video:</p>
+                        
+                        <div class="alert alert-info">
+                            <strong>🎥 Video Demostración:</strong> 
+                            <a href="https://medal.tv/es/games/gta-v/clips/l7CtFWUqpyyBvtG3Z?invite=cr-MSxQU0YsMTgyNTEzMzg4&v=32" 
+                               target="_blank" style="color: #3b82f6;">Ver en Medal.tv</a>
+                        </div>
+                    </section>
+
+                    <!-- Créditos -->
+                    <section class="content-card" id="creditos">
+                        <h2>🤝 Créditos y Licencia</h2>
+                        
+                        <h3>Desarrollador</h3>
+                        <p><strong>👤 Autor:</strong> Pausiar</p>
+                        <p><strong>🛠️ Inspiración:</strong> Necesidad de un rol más realista en servidores FiveM</p>
+
+                        <h3>📜 Licencia</h3>
+                        <p>Este recurso es <strong>gratuito y libre de uso</strong> en cualquier servidor, siempre que se mantengan los créditos al autor.</p>
+
+                        <div class="alert alert-success">
+                            <strong>✅ Uso Libre:</strong> Puedes usar, modificar y distribuir este script manteniendo la atribución al autor original.
+                        </div>
+                    </section>
+                </div>
+
+                <div class="sidebar">
+                    <div class="sidebar-card">
+                        <h3>📋 Navegación Rápida</h3>
+                        <ul>
+                            <li><a href="#caracteristicas">✨ Características</a></li>
+                            <li><a href="#instalacion">📦 Instalación</a></li>
+                            <li><a href="#configuracion">⚙️ Configuración</a></li>
+                            <li><a href="#changelog">📝 Changelog</a></li>
+                            <li><a href="#preview">📸 Preview</a></li>
+                            <li><a href="#creditos">🤝 Créditos</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>🔗 Enlaces Útiles</h3>
+                        <ul>
+                            <li><a href="https://github.com/Pausiar/anti-tank">📂 Repositorio GitHub</a></li>
+                            <li><a href="index.html">🏠 Volver al Inicio</a></li>
+                            <li><a href="https://github.com/Pausiar">👤 Perfil del Autor</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>📊 Información</h3>
+                        <p><strong>Versión:</strong> 1.1.0</p>
+                        <p><strong>Compatibilidad:</strong> FiveM</p>
+                        <p><strong>Framework:</strong> Standalone</p>
+                        <p><strong>Rendimiento:</strong> Optimizado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in sidebar
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const sidebarLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.style.color = 'var(--text-secondary)';
+                link.style.background = 'transparent';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = 'var(--primary)';
+                    link.style.background = 'var(--dark-tertiary)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
