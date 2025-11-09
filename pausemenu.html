@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS Pause Menu - Documentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --dark: #0f172a;
+            --dark-secondary: #1e293b;
+            --dark-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background: var(--dark-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .badge.version {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-button.primary:hover {
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.25rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .installation-steps {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            background: var(--gradient);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+            color: #6ee7b7;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--warning);
+            color: #fbbf24;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">⏸️ PS Pause Menu</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Volver al Inicio</a></li>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#installation">Instalación</a></li>
+                <li><a href="#config">Configuración</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero" id="inicio">
+                <h1>PS Pause Menu</h1>
+                <p>Menú de pausa moderno y personalizable para FiveM con interfaz intuitiva, información del jugador en tiempo real, acceso rápido a funciones y diseño completamente responsive.</p>
+                
+                <div class="hero-badges">
+                    <span class="badge version">v1.0.0</span>
+                    <span class="badge">FiveM</span>
+                    <span class="badge">NUI</span>
+                    <span class="badge">HTML5</span>
+                    <span class="badge">ESX/QBCore</span>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#installation" class="cta-button primary">Comenzar Instalación</a>
+                    <a href="#showcase" class="cta-button secondary">Ver Showcase</a>
+                </div>
+            </section>
+
+            <section class="section" id="showcase">
+                <h2>🎥 Showcase</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Mira el menú de pausa en acción</p>
+                
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px;">
+                        <iframe 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            src="https://www.youtube.com/embed/i_EH50rCIP4" 
+                            title="PS Pause Menu Showcase" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="features">
+                <h2>🌟 Características Principales</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Diseño Moderno</h3>
+                        <p>Interfaz elegante y minimalista con efectos visuales profesionales.</p>
+                        <ul class="feature-list">
+                            <li>Diseño limpio y intuitivo</li>
+                            <li>Animaciones suaves y fluidas</li>
+                            <li>Glassmorphism effects</li>
+                            <li>Tema oscuro optimizado</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <h3>Información del Jugador</h3>
+                        <p>Muestra toda la información relevante del personaje en tiempo real.</p>
+                        <ul class="feature-list">
+                            <li>Nombre del personaje</li>
+                            <li>ID del servidor</li>
+                            <li>Trabajo y rango</li>
+                            <li>Dinero y cuentas bancarias</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Estadísticas en Tiempo Real</h3>
+                        <p>Información actualizada constantemente sobre el estado del jugador.</p>
+                        <ul class="feature-list">
+                            <li>Salud y armadura</li>
+                            <li>Hambre y sed</li>
+                            <li>Estrés y fatiga</li>
+                            <li>Nivel de oxígeno</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🗺️</div>
+                        <h3>Mapa Integrado</h3>
+                        <p>Visualización del mapa directamente desde el menú de pausa.</p>
+                        <ul class="feature-list">
+                            <li>Mapa interactivo del juego</li>
+                            <li>Visualización de waypoints</li>
+                            <li>Ubicación actual del jugador</li>
+                            <li>Zoom y navegación fluida</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Configuración Rápida</h3>
+                        <p>Acceso rápido a configuraciones y opciones del juego.</p>
+                        <ul class="feature-list">
+                            <li>Configuración de audio</li>
+                            <li>Opciones de interfaz</li>
+                            <li>Controles y teclas</li>
+                            <li>Ajustes de rendimiento</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3>Enlaces Rápidos</h3>
+                        <p>Acceso directo a recursos importantes del servidor.</p>
+                        <ul class="feature-list">
+                            <li>Discord del servidor</li>
+                            <li>Página web</li>
+                            <li>Reglas y normativa</li>
+                            <li>Tienda online</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Información del Servidor</h3>
+                        <p>Estadísticas y datos del servidor en tiempo real.</p>
+                        <ul class="feature-list">
+                            <li>Jugadores conectados</li>
+                            <li>Tiempo de actividad</li>
+                            <li>Ping del jugador</li>
+                            <li>Versión del servidor</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p>Adaptado perfectamente a todas las resoluciones de pantalla.</p>
+                        <ul class="feature-list">
+                            <li>Compatible con todas las resoluciones</li>
+                            <li>Escalado automático</li>
+                            <li>Optimizado para 4K</li>
+                            <li>UI adaptativa</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>💡 Experiencia Premium:</strong> El menú de pausa está diseñado para proporcionar una experiencia de usuario profesional y moderna, mejorando significativamente la interfaz estándar de FiveM.
+                </div>
+            </section>
+
+            <section class="section" id="installation">
+                <h2>🚀 Guía de Instalación</h2>
+                
+                <div class="installation-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Descargar y Extraer</h3>
+                            <p>Descarga el script y colócalo en tu carpeta de recursos</p>
+                            <div class="code-block">
+                                <pre># Estructura recomendada
+resources/[menu]/ps_pausemenu/</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Configurar el Script</h3>
+                            <p>Edita el archivo ps-config.lua para personalizar el menú</p>
+                            <div class="code-block">
+                                <pre>Config = {
+    Framework = 'esx',              -- 'esx' o 'qbcore'
+    ServerName = 'Tu Servidor RP',
+    ServerLogo = 'URL_DEL_LOGO',
+    DiscordLink = 'discord.gg/tu-servidor',
+    WebsiteLink = 'tu-website.com'
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Añadir al Server.cfg</h3>
+                            <p>Asegura el recurso en tu configuración del servidor</p>
+                            <div class="code-block">
+                                <pre># Añadir al server.cfg
+ensure ps_pausemenu</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Personalizar la UI</h3>
+                            <p>Modifica los estilos CSS para que coincidan con tu servidor</p>
+                            <div class="code-block">
+                                <pre>/* En ps-design.css */
+:root {
+    --primary-color: #8b5cf6;
+    --secondary-color: #ec4899;
+    --background-dark: #0f172a;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Reiniciar y Probar</h3>
+                            <p>Reinicia el servidor y presiona ESC para abrir el menú</p>
+                            <div class="code-block">
+                                <pre># Reiniciar el recurso
+restart ps_pausemenu</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ ¡Instalación Completada!</strong> Los jugadores ahora tendrán acceso al nuevo menú de pausa presionando la tecla ESC.
+                </div>
+            </section>
+
+            <section class="section" id="config">
+                <h2>⚙️ Configuración Avanzada</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Información del Servidor</h3>
+                        <div class="code-block">
+                            <pre>Config.Server = {
+    Name = 'Tu Servidor RP',
+    Logo = 'https://i.imgur.com/tu-logo.png',
+    Description = 'El mejor servidor de roleplay',
+    MaxPlayers = 64,
+    ShowPlayerCount = true
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Enlaces y Redes Sociales</h3>
+                        <div class="code-block">
+                            <pre>Config.Links = {
+    Discord = 'discord.gg/tu-servidor',
+    Website = 'https://tu-website.com',
+    Rules = 'https://tu-website.com/rules',
+    Store = 'https://tu-tienda.com',
+    Forum = 'https://tu-foro.com'
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Opciones de Visualización</h3>
+                        <div class="code-block">
+                            <pre>Config.Display = {
+    ShowHealth = true,
+    ShowArmor = true,
+    ShowHunger = true,
+    ShowThirst = true,
+    ShowStress = true,
+    ShowMoney = true,
+    ShowBank = true,
+    ShowJob = true
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Personalización de Colores</h3>
+                        <div class="code-block">
+                            <pre>Config.Theme = {
+    PrimaryColor = '#8b5cf6',
+    SecondaryColor = '#ec4899',
+    AccentColor = '#10b981',
+    BackgroundColor = '#0f172a',
+    TextColor = '#f8fafc'
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Configuración del Mapa</h3>
+                        <div class="code-block">
+                            <pre>Config.Map = {
+    Enabled = true,
+    DefaultZoom = 3,
+    ShowBlips = true,
+    ShowWaypoint = true,
+    ShowPlayerLocation = true
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Teclas y Controles</h3>
+                        <div class="code-block">
+                            <pre>Config.Keys = {
+    OpenMenu = 'ESC',           -- Tecla para abrir
+    CloseMenu = 'ESC',          -- Tecla para cerrar
+    NavigateUp = 'UP',
+    NavigateDown = 'DOWN',
+    Select = 'ENTER'
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="customization">
+                <h2>🎨 Personalización de la Interfaz</h2>
+                
+                <div class="installation-steps">
+                    <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-primary);">Guía de Personalización Visual</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Cambiar Logo del Servidor</h3>
+                            <p>Personaliza el logo que aparece en el menú</p>
+                            <ul class="feature-list">
+                                <li>Usa formato PNG con fondo transparente</li>
+                                <li>Resolución recomendada: 512x512 píxeles</li>
+                                <li>Sube a imgur u otro hosting de imágenes</li>
+                                <li>Actualiza la URL en ps-config.lua</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Personalizar Esquema de Colores</h3>
+                            <p>Adapta los colores a la identidad de tu servidor</p>
+                            <ul class="feature-list">
+                                <li>Edita las variables CSS en ps-design.css</li>
+                                <li>Usa colores que contrasten bien</li>
+                                <li>Mantén la legibilidad del texto</li>
+                                <li>Prueba en diferentes resoluciones</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Añadir Iconos Personalizados</h3>
+                            <p>Cambia los iconos de las diferentes secciones</p>
+                            <ul class="feature-list">
+                                <li>Usa Font Awesome o iconos personalizados</li>
+                                <li>Modifica ps-index.html</li>
+                                <li>Mantén el tamaño consistente</li>
+                                <li>Asegura compatibilidad con todos los navegadores</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Modificar Diseño y Layout</h3>
+                            <p>Ajusta la disposición de elementos según tus preferencias</p>
+                            <ul class="feature-list">
+                                <li>Edita el HTML en ps-index.html</li>
+                                <li>Ajusta el CSS en ps-design.css</li>
+                                <li>Modifica el JavaScript en ps-app.js si es necesario</li>
+                                <li>Prueba todos los cambios antes de publicar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="features-detail">
+                <h2>📋 Funcionalidades Detalladas</h2>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Panel de Información</h3>
+                        <p><strong>Datos Personales:</strong></p>
+                        <ul class="feature-list">
+                            <li>Nombre completo del personaje</li>
+                            <li>ID único del jugador</li>
+                            <li>Tiempo en el servidor</li>
+                            <li>Fecha de ingreso</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Panel de Economía</h3>
+                        <p><strong>Información Financiera:</strong></p>
+                        <ul class="feature-list">
+                            <li>Dinero en efectivo</li>
+                            <li>Saldo bancario</li>
+                            <li>Dinero negro (si aplica)</li>
+                            <li>Transacciones recientes</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Panel de Trabajo</h3>
+                        <p><strong>Información Laboral:</strong></p>
+                        <ul class="feature-list">
+                            <li>Trabajo actual</li>
+                            <li>Rango o grado</li>
+                            <li>Salario por hora</li>
+                            <li>Horas trabajadas</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Panel de Estado</h3>
+                        <p><strong>Condición del Jugador:</strong></p>
+                        <ul class="feature-list">
+                            <li>Nivel de salud (HP)</li>
+                            <li>Nivel de armadura</li>
+                            <li>Estado de hambre</li>
+                            <li>Nivel de sed</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="compatibility">
+                <h2>🔌 Compatibilidad</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>✅ Compatible Con</h3>
+                        <ul class="feature-list">
+                            <li>ESX Legacy</li>
+                            <li>QBCore Framework</li>
+                            <li>esx_status / qb-hud</li>
+                            <li>esx_basicneeds</li>
+                            <li>Todos los navegadores modernos</li>
+                            <li>Resoluciones 720p a 4K</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📋 Requisitos</h3>
+                        <ul class="feature-list">
+                            <li>FiveM actualizado</li>
+                            <li>ESX Legacy o QBCore</li>
+                            <li>Artifacts recientes</li>
+                            <li>NUI habilitado</li>
+                            <li>Navegador Chromium actualizado</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>⚡ Rendimiento</h3>
+                        <ul class="feature-list">
+                            <li>Uso mínimo de CPU (0.02ms)</li>
+                            <li>Sin impacto en FPS</li>
+                            <li>Carga instantánea</li>
+                            <li>Optimizado para NUI</li>
+                            <li>Código limpio y eficiente</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="troubleshooting">
+                <h2>🔧 Solución de Problemas</h2>
+                
+                <div class="installation-steps">
+                    <div class="step">
+                        <div class="step-number">⚠️</div>
+                        <div class="step-content">
+                            <h3>El menú no se abre</h3>
+                            <ul class="feature-list">
+                                <li>Verifica que el recurso esté iniciado</li>
+                                <li>Comprueba la consola F8 por errores</li>
+                                <li>Asegúrate de que NUI esté habilitado</li>
+                                <li>Verifica la tecla configurada (ESC por defecto)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">📊</div>
+                        <div class="step-content">
+                            <h3>La información no se actualiza</h3>
+                            <ul class="feature-list">
+                                <li>Verifica la conexión con el framework</li>
+                                <li>Comprueba que Config.Framework esté correcto</li>
+                                <li>Revisa los eventos del servidor</li>
+                                <li>Asegúrate de que esx_status esté funcionando</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">🎨</div>
+                        <div class="step-content">
+                            <h3>Problemas visuales o de diseño</h3>
+                            <ul class="feature-list">
+                                <li>Limpia la caché del navegador NUI</li>
+                                <li>Verifica que los archivos CSS no estén corruptos</li>
+                                <li>Comprueba la resolución de pantalla</li>
+                                <li>Prueba con diferentes escalas de UI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Nota:</strong> Si experimentas problemas persistentes, prueba con una instalación limpia del recurso y verifica que no haya conflictos con otros menús o HUDs.
+                </div>
+            </section>
+
+            <section class="section" id="support">
+                <h2>📞 Soporte y Comunidad</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Comunidad</h3>
+                        <p>Únete a nuestra comunidad para soporte y actualizaciones</p>
+                        <a href="https://discord.gg/TCMuXFgVpw" class="cta-button secondary" style="display: inline-block; margin-top: 1rem;">Discord</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🐛</div>
+                        <h3>Reportar Bugs</h3>
+                        <p>Ayúdanos a mejorar reportando errores y sugerencias</p>
+                        <a href="https://github.com/Pausiar" class="cta-button secondary" style="display: inline-block; margin-top: 1rem;">GitHub</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Documentación</h3>
+                        <p>Guía completa de instalación y personalización</p>
+                        <a href="#installation" class="cta-button secondary" style="display: inline-block; margin-top: 1rem;">Ver Guía</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="feature-card" style="text-align: center;">  
+                    <div style="margin: 2rem 0; padding: 2rem; background: var(--dark-secondary); border-radius: 12px;">
+                        <h4>🔄 Changelog v1.0.0</h4>
+                        <ul class="feature-list" style="text-align: left; max-width: 600px; margin: 0 auto;">
+                            <li>🎨 Diseño moderno y minimalista implementado</li>
+                            <li>👤 Panel de información del jugador completo</li>
+                            <li>📊 Estadísticas en tiempo real integradas</li>
+                            <li>🗺️ Sistema de mapa interactivo añadido</li>
+                            <li>⚙️ Configuración rápida accesible</li>
+                            <li>🔗 Enlaces rápidos a recursos del servidor</li>
+                            <li>🌐 Información del servidor en tiempo real</li>
+                            <li>📱 Diseño completamente responsive</li>
+                            <li>⚡ Optimización de rendimiento NUI</li>
+                            <li>🔧 Sistema de configuración flexible</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de aparición de elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
