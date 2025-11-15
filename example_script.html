@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS Example Script - Documentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --dark-secondary: #1e293b;
+            --dark-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .version {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .content-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-section h3 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .content-section li {
+            margin: 0.5rem 0;
+        }
+
+        .code-block {
+            background: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: var(--secondary);
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🎮 Pausiar Scripts</div>
+            <ul class="nav-links">
+                <li><a href="index.html">← Volver</a></li>
+                <li><a href="https://github.com/Pausiar">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <span class="version">v1.0.0</span>
+                <h1>📚 PS Example Script</h1>
+                <p>Este es un ejemplo de documentación creada con TEMPLATE.html. Demuestra cómo documentar correctamente un script de FiveM.</p>
+                <div>
+                    <a href="#instalacion" class="btn btn-primary">Instalación</a>
+                    <a href="#configuracion" class="btn btn-secondary">Configuración</a>
+                </div>
+            </section>
+
+            <div class="success-box">
+                <strong>✅ Nota:</strong> Este es un script de ejemplo para demostrar cómo usar el template de documentación. No es un script real.
+            </div>
+
+            <!-- Características -->
+            <section class="content-section">
+                <h2>✨ Características Principales</h2>
+                <ul>
+                    <li>Sistema modular y fácil de configurar</li>
+                    <li>Compatible con ESX Legacy y QBCore</li>
+                    <li>Interfaz de usuario moderna con NUI</li>
+                    <li>Optimizado para rendimiento (0.00ms en idle)</li>
+                    <li>Soporte multiidioma (ES/EN)</li>
+                    <li>Base de datos MySQL integrada</li>
+                    <li>Sistema de permisos flexible</li>
+                    <li>Logs completos de actividad</li>
+                </ul>
+            </section>
+
+            <!-- Requisitos -->
+            <section class="content-section" id="requisitos">
+                <h2>📋 Requisitos</h2>
+                <ul>
+                    <li><strong>Framework:</strong> ESX Legacy 1.9+ o QBCore</li>
+                    <li><strong>Base de datos:</strong> MySQL 5.7+ / MariaDB 10.3+</li>
+                    <li><strong>Dependencias:</strong>
+                        <ul>
+                            <li>es_extended (para ESX) o qb-core (para QBCore)</li>
+                            <li>oxmysql o mysql-async</li>
+                            <li>ox_lib (opcional, pero recomendado)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Versión del servidor:</strong> FiveM artifact 5000+</li>
+                </ul>
+            </section>
+
+            <!-- Instalación -->
+            <section class="content-section" id="instalacion">
+                <h2>⚙️ Instalación</h2>
+                
+                <h3>1. Descarga el script</h3>
+                <p>Descarga la última versión desde el repositorio de GitHub o tu plataforma de distribución.</p>
+
+                <h3>2. Extrae los archivos</h3>
+                <p>Extrae el contenido en tu carpeta de recursos:</p>
+                <div class="code-block">
+                    <code>server-data/resources/[pausiar]/ps_example/</code>
+                </div>
+
+                <h3>3. Importa la base de datos</h3>
+                <p>Importa el archivo SQL incluido en tu base de datos:</p>
+                <div class="code-block">
+                    <code>mysql -u usuario -p nombre_base_datos &lt; ps_example.sql</code>
+                </div>
+                <p>O usa tu gestor de bases de datos favorito (HeidiSQL, phpMyAdmin, etc.)</p>
+
+                <h3>4. Configura el archivo</h3>
+                <p>Edita el archivo <code>config.lua</code> según tus necesidades (ver sección de configuración más abajo).</p>
+
+                <h3>5. Añade al server.cfg</h3>
+                <p>Agrega la siguiente línea a tu <code>server.cfg</code>:</p>
+                <div class="code-block">
+                    <code>ensure ps_example</code>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> Asegúrate de que el script se cargue después de tu framework (ESX o QBCore) y sus dependencias.
+                </div>
+
+                <h3>6. Reinicia el servidor</h3>
+                <p>Reinicia tu servidor y el script estará listo para usar.</p>
+            </section>
+
+            <!-- Configuración -->
+            <section class="content-section" id="configuracion">
+                <h2>🔧 Configuración</h2>
+                
+                <p>El archivo <code>config.lua</code> contiene todas las opciones configurables. A continuación se muestran las opciones principales:</p>
+
+                <h3>Configuración General</h3>
+                <div class="code-block">
+                    <code>Config = {}
+
+-- Framework: 'esx' o 'qbcore'
+Config.Framework = 'esx'
+
+-- Idioma: 'es' (español) o 'en' (inglés)
+Config.Locale = 'es'
+
+-- Activar debug (muestra mensajes en consola)
+Config.Debug = false
+
+-- Usar ox_lib para notificaciones y menús
+Config.UseOxLib = true</code>
+                </div>
+
+                <h3>Configuración de Funcionalidades</h3>
+                <div class="code-block">
+                    <code>-- Activar sistema de logs
+Config.EnableLogs = true
+
+-- Webhook de Discord para logs (opcional)
+Config.DiscordWebhook = 'https://discord.com/api/webhooks/...'
+
+-- Distancia de interacción (en metros)
+Config.InteractionDistance = 2.5
+
+-- Cooldown entre usos (en segundos)
+Config.Cooldown = 60</code>
+                </div>
+
+                <h3>Configuración de Ubicaciones</h3>
+                <div class="code-block">
+                    <code>-- Ubicaciones de interacción
+Config.Locations = {
+    {
+        coords = vector3(195.17, -933.77, 30.69),
+        heading = 180.0,
+        blip = {
+            enabled = true,
+            sprite = 280,
+            color = 3,
+            scale = 0.8,
+            label = "Example Location"
+        }
+    },
+    -- Añadir más ubicaciones aquí
+}</code>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Importante:</strong> Después de modificar la configuración, debes reiniciar el script o el servidor para que los cambios tengan efecto.
+                </div>
+            </section>
+
+            <!-- Uso -->
+            <section class="content-section" id="uso">
+                <h2>📖 Uso</h2>
+                
+                <h3>Comandos de Usuario</h3>
+                <ul>
+                    <li><code>/example</code> - Abre el menú principal</li>
+                    <li><code>/examplehelp</code> - Muestra la ayuda del script</li>
+                    <li><code>/examplestats</code> - Muestra tus estadísticas</li>
+                </ul>
+
+                <h3>Comandos de Administración</h3>
+                <ul>
+                    <li><code>/exampleadmin</code> - Abre el panel de administración</li>
+                    <li><code>/examplereload</code> - Recarga la configuración del script</li>
+                    <li><code>/exampleclear [id]</code> - Limpia los datos de un jugador</li>
+                </ul>
+
+                <h3>Permisos</h3>
+                <p>Los siguientes permisos están disponibles (según tu framework):</p>
+                
+                <h4>ESX:</h4>
+                <ul>
+                    <li><code>ps_example.user</code> - Acceso básico de usuario</li>
+                    <li><code>ps_example.admin</code> - Acceso administrativo completo</li>
+                </ul>
+
+                <h4>QBCore:</h4>
+                <ul>
+                    <li>Rank "user" - Acceso básico</li>
+                    <li>Rank "admin" o "god" - Acceso administrativo</li>
+                </ul>
+
+                <h3>Exportaciones (para desarrolladores)</h3>
+                <p>El script exporta las siguientes funciones para uso de otros recursos:</p>
+                
+                <div class="code-block">
+                    <code>-- Obtener datos del jugador
+local data = exports.ps_example:GetPlayerData(playerId)
+
+-- Verificar si un jugador puede usar la función
+local canUse = exports.ps_example:CanUseFeature(playerId)
+
+-- Agregar puntos a un jugador
+exports.ps_example:AddPoints(playerId, amount)</code>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Para desarrolladores:</strong> Consulta el archivo <code>exports.lua</code> para ver todas las exportaciones disponibles.
+                </div>
+            </section>
+
+            <!-- Solución de Problemas -->
+            <section class="content-section">
+                <h2>🔍 Solución de Problemas</h2>
+                
+                <h3>Problema: El script no aparece en el servidor</h3>
+                <p><strong>Solución:</strong></p>
+                <ul>
+                    <li>Verifica que la línea <code>ensure ps_example</code> esté en tu server.cfg</li>
+                    <li>Comprueba que el nombre de la carpeta sea exactamente <code>ps_example</code></li>
+                    <li>Revisa la consola del servidor en busca de errores</li>
+                </ul>
+
+                <h3>Problema: Error de base de datos</h3>
+                <p><strong>Solución:</strong></p>
+                <ul>
+                    <li>Asegúrate de haber importado el archivo ps_example.sql</li>
+                    <li>Verifica que oxmysql o mysql-async estén funcionando correctamente</li>
+                    <li>Comprueba las credenciales de tu base de datos</li>
+                </ul>
+
+                <h3>Problema: Los comandos no funcionan</h3>
+                <p><strong>Solución:</strong></p>
+                <ul>
+                    <li>Verifica que tengas los permisos necesarios</li>
+                    <li>Asegúrate de que el framework (ESX/QBCore) esté correctamente configurado</li>
+                    <li>Intenta reiniciar el script con <code>restart ps_example</code></li>
+                </ul>
+
+                <h3>Problema: Bajo rendimiento / Lag</h3>
+                <p><strong>Solución:</strong></p>
+                <ul>
+                    <li>Reduce Config.InteractionDistance si es muy alto</li>
+                    <li>Desactiva Config.Debug en producción</li>
+                    <li>Verifica que no haya conflictos con otros scripts</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Recuerda:</strong> Siempre haz una copia de seguridad antes de hacer cambios en tu servidor.
+                </div>
+            </section>
+
+            <!-- Preguntas Frecuentes -->
+            <section class="content-section">
+                <h2>❓ Preguntas Frecuentes</h2>
+                
+                <h3>¿Es compatible con otros scripts?</h3>
+                <p>Sí, el script está diseñado para ser compatible con la mayoría de los recursos de FiveM. Si encuentras algún conflicto, por favor repórtalo.</p>
+
+                <h3>¿Puedo modificar el script?</h3>
+                <p>Sí, puedes modificar el script para adaptarlo a tus necesidades. Sin embargo, se recomienda mantener una copia del original.</p>
+
+                <h3>¿Hay soporte multiservidor?</h3>
+                <p>Sí, cada servidor tendrá su propia instancia independiente siempre que usen bases de datos separadas.</p>
+
+                <h3>¿Funciona en servidores OneSync?</h3>
+                <p>Sí, el script es totalmente compatible con OneSync y OneSync Infinity.</p>
+            </section>
+
+            <!-- Soporte -->
+            <section class="content-section">
+                <h2>💬 Soporte y Contacto</h2>
+                <p>Si necesitas ayuda adicional o quieres reportar un bug:</p>
+                <ul>
+                    <li><strong>Discord:</strong> @pausiar</li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/Pausiar" style="color: var(--primary)">Pausiar</a></li>
+                    <li><strong>Issues:</strong> <a href="https://github.com/Pausiar/ps_example/issues" style="color: var(--primary)">GitHub Issues</a></li>
+                </ul>
+
+                <div class="success-box">
+                    <strong>✨ ¡Gracias por usar PS Example!</strong> Si te gusta el script, considera dejar una estrella ⭐ en GitHub.
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
