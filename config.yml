@@ -1,17 +1,17 @@
 # Configuración básica del sitio
-title: "Script Documentation"
-description: "Documentación completa de scripts útiles"
-baseurl: "" # el subpath de tu sitio, ej. /blog
-url: "https://tu-usuario.github.io" # la URL base del sitio
+title: "PS Scripts Documentation"
+description: "Documentación técnica premium para scripts de FiveM de PS Scripts"
+baseurl: "/ps_scripts-documentation" # subpath del repositorio en GitHub Pages
+url: "https://pausiar.github.io" # URL base esperada de GitHub Pages
 
 # Información del autor
 author:
-  name: "Tu Nombre"
-  email: "tu-email@example.com"
-  github: "tu-usuario"
+  name: "Pausiar"
+  email: ""
+  github: "Pausiar"
 
 # Configuración de GitHub Pages
-repository: tu-usuario/nombre-repositorio
+repository: Pausiar/ps_scripts-documentation
 
 # Jekyll settings
 markdown: kramdown
